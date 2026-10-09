@@ -69,7 +69,7 @@ Python 3.9 之前的标准库里没有 `application/wasm` 这条 MIME 记录，
 | `site/` | 构建好的静态站点，GitHub Pages 发布的就是这个目录 |
 | `source/` | 前端源码（Vite + React 19 + TypeScript + Three.js + ECharts） |
 | `tools/` | 资产导出与打包核对脚本 |
-| `docs/` | 作品计划、数据契约、界面设计说明 |
+| `docs/` | 作品计划、数据契约、界面设计说明，以及开发过程的任务单与轮次记录（见 [`docs/README.md`](docs/README.md)） |
 | `LICENSE` | 代码的 MIT 许可 |
 | `DATA_LICENSE.md` | 数据与模型资产的 ODbL 许可与引用要求 |
 
