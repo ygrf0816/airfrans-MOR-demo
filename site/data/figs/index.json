@@ -1,0 +1,278 @@
+{
+ "items": [
+  {
+   "file": "cmp_full_p.webp",
+   "title": "数据充足（full）：压力 p 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：数据充足（full）；场量：压力 p（单位 m²/s²）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "full_field_p.png"
+  },
+  {
+   "file": "cmp_full_u.webp",
+   "title": "数据充足（full）：流向速度 u 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：数据充足（full）；场量：流向速度 u（单位 m/s）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "full_field_u.png"
+  },
+  {
+   "file": "cmp_full_v.webp",
+   "title": "数据充足（full）：横向速度 v 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：数据充足（full）；场量：横向速度 v（单位 m/s）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "full_field_v.png"
+  },
+  {
+   "file": "cmp_full_nu_t.webp",
+   "title": "数据充足（full）：涡黏系数 νt 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：数据充足（full）；场量：涡黏系数 νt（单位 m²/s）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "full_field_nu_t.png"
+  },
+  {
+   "file": "cmp_scarce_p.webp",
+   "title": "数据稀缺（scarce）：压力 p 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：数据稀缺（scarce）；场量：压力 p（单位 m²/s²）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "scarce_field_p.png"
+  },
+  {
+   "file": "cmp_scarce_u.webp",
+   "title": "数据稀缺（scarce）：流向速度 u 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：数据稀缺（scarce）；场量：流向速度 u（单位 m/s）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "scarce_field_u.png"
+  },
+  {
+   "file": "cmp_scarce_v.webp",
+   "title": "数据稀缺（scarce）：横向速度 v 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：数据稀缺（scarce）；场量：横向速度 v（单位 m/s）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "scarce_field_v.png"
+  },
+  {
+   "file": "cmp_scarce_nu_t.webp",
+   "title": "数据稀缺（scarce）：涡黏系数 νt 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：数据稀缺（scarce）；场量：涡黏系数 νt（单位 m²/s）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "scarce_field_nu_t.png"
+  },
+  {
+   "file": "cmp_reynolds_p.webp",
+   "title": "外推到未见过的雷诺数（reynolds）：压力 p 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：外推到未见过的雷诺数（reynolds）；场量：压力 p（单位 m²/s²）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "reynolds_field_p.png"
+  },
+  {
+   "file": "cmp_reynolds_u.webp",
+   "title": "外推到未见过的雷诺数（reynolds）：流向速度 u 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：外推到未见过的雷诺数（reynolds）；场量：流向速度 u（单位 m/s）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "reynolds_field_u.png"
+  },
+  {
+   "file": "cmp_reynolds_v.webp",
+   "title": "外推到未见过的雷诺数（reynolds）：横向速度 v 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：外推到未见过的雷诺数（reynolds）；场量：横向速度 v（单位 m/s）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "reynolds_field_v.png"
+  },
+  {
+   "file": "cmp_reynolds_nu_t.webp",
+   "title": "外推到未见过的雷诺数（reynolds）：涡黏系数 νt 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：外推到未见过的雷诺数（reynolds）；场量：涡黏系数 νt（单位 m²/s）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "reynolds_field_nu_t.png"
+  },
+  {
+   "file": "cmp_aoa_p.webp",
+   "title": "外推到未见过的攻角（aoa）：压力 p 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：外推到未见过的攻角（aoa）；场量：压力 p（单位 m²/s²）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "aoa_field_p.png"
+  },
+  {
+   "file": "cmp_aoa_u.webp",
+   "title": "外推到未见过的攻角（aoa）：流向速度 u 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：外推到未见过的攻角（aoa）；场量：流向速度 u（单位 m/s）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "aoa_field_u.png"
+  },
+  {
+   "file": "cmp_aoa_v.webp",
+   "title": "外推到未见过的攻角（aoa）：横向速度 v 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：外推到未见过的攻角（aoa）；场量：横向速度 v（单位 m/s）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "aoa_field_v.png"
+  },
+  {
+   "file": "cmp_aoa_nu_t.webp",
+   "title": "外推到未见过的攻角（aoa）：涡黏系数 νt 三列对比",
+   "caption": "三列同一格点、共用同一色标：左为真值（CFD 数值解），中为官方路线（逐点图神经网络 GNN），右为本作品路线（降维 POD 坐标回归）。每列标题给出与真值的相对误差 relL2，数字越小越准。任务：外推到未见过的攻角（aoa）；场量：涡黏系数 νt（单位 m²/s）。",
+   "source": "07_surrogate 报告 第 6 节",
+   "original": "aoa_field_nu_t.png"
+  },
+  {
+   "file": "fig01.webp",
+   "title": "四条物理自检与升力阻力主数字",
+   "caption": "图 1　四条物理自检与升力阻力主数字。 闭合残差、压力系数范围、阻力系数正性、异常扫描结果，以及升力与攻角的相关。",
+   "source": "论文图 1",
+   "original": "fig1_physics_check.png"
+  },
+  {
+   "file": "fig02.webp",
+   "title": "参数与雷诺数、攻角的相关系数矩阵",
+   "caption": "图 2　参数与雷诺数、攻角的相关系数矩阵。 几何参数、来流速度、攻角与雷诺数两两之间的皮尔逊相关系数。",
+   "source": "论文图 2",
+   "original": "fig2_corr_matrix.png"
+  },
+  {
+   "file": "fig03.webp",
+   "title": "重构误差随模态数下降",
+   "caption": "图 3　重构误差随模态数下降。 训练与测试曲线重合，说明没有过拟合。横轴是模态数，纵轴是相对重构误差。",
+   "source": "论文图 3",
+   "original": "fig3_recon_vs_r.png"
+  },
+  {
+   "file": "fig04.webp",
+   "title": "本文模型与基线的对比",
+   "caption": "图 4　本文模型与基线的对比。 按四个场景分别给出场量误差与升力排序相关。基线包括均值场、线性回归、官方模型单轮。",
+   "source": "论文图 4",
+   "original": "fig4_baselines.png"
+  },
+  {
+   "file": "fig05.webp",
+   "title": "数据侧与模型侧的几何分量影响对比",
+   "caption": "图 5　数据侧与模型侧的几何分量影响对比。 每个几何分量的标准化偏回归系数（数据侧）与位移范数（模型侧），按四位数族与五位数族分开列出。",
+   "source": "论文图 5",
+   "original": "fig5_sensitivity.png"
+  },
+  {
+   "file": "fig06.webp",
+   "title": "升力与攻角的关系按弯度分档",
+   "caption": "图 6　升力与攻角的关系按弯度分档。 数据侧与模型侧的斜率对比，按弯度分档列出。",
+   "source": "论文图 6",
+   "original": "fig6_interaction.png"
+  },
+  {
+   "file": "fig07.webp",
+   "title": "吸力峰位置随攻角的迁移",
+   "caption": "图 7　吸力峰位置随攻角的迁移。 横轴是攻角，纵轴是吸力峰弦向位置，数据侧与模型侧两条曲线并列。",
+   "source": "论文图 7",
+   "original": "fig7_suction_peak.png"
+  },
+  {
+   "file": "fig08.webp",
+   "title": "设计空间与可行域",
+   "caption": "图 8　设计空间与可行域。 左图是每个参数格子上能达到的最好升力，中图是可行的参数比例，右图把可行与不可行分区画出，星号是后文五个案例，三角是数据库设计点最优的真实翼型。",
+   "source": "论文图 8",
+   "original": "fig8_design_space.png"
+  },
+  {
+   "file": "fig09.webp",
+   "title": "三次独立运行的收敛过程",
+   "caption": "图 9　三次独立运行的收敛过程。 左：可行解里最好的 8 度升力；中：种群中可行解的个数；右：折中曲线覆盖的面积。",
+   "source": "论文图 9",
+   "original": "fig9_convergence.png"
+  },
+  {
+   "file": "fig10.webp",
+   "title": "三个种子各自搜出的折中曲线",
+   "caption": "图 10　三个种子各自搜出的折中曲线。 横轴是带内损失，纵轴是 8 度攻角的升力；两条虚线是数据库设计点最优 1.146 与工作带可达上界 1.422。",
+   "source": "论文图 10",
+   "original": "fig10_pareto.png"
+  },
+  {
+   "file": "fig11.webp",
+   "title": "五个案例的带内稳健性",
+   "caption": "图 11　五个案例的带内稳健性。 左：五个案例在 4、8、10 度三个攻角上的升力；右：五个案例的带内损失，虚线是超过数据库最优所必须付出的代价约 0.37。",
+   "source": "论文图 11",
+   "original": "fig11_band_loss.png"
+  },
+  {
+   "file": "fig12.webp",
+   "title": "五个案例的剖面形状",
+   "caption": "图 12　五个案例的剖面形状。 红色是上表面，蓝色是下表面。Q 取 0 为正常弯，取 1 为反弯。",
+   "source": "论文图 12",
+   "original": "fig12_case_shapes.png"
+  },
+  {
+   "file": "fig13.webp",
+   "title": "案例 1 的三联图",
+   "caption": "图 13　案例 1 的三联图。 左是剖面形状，中是 8 度压力场，蓝色是低压区。右是 4、8、10 度三个攻角下的表面压力曲线，实线是吸力面。",
+   "source": "论文图 13",
+   "original": "fig13_case1.png"
+  },
+  {
+   "file": "fig14.webp",
+   "title": "案例 2 的三联图",
+   "caption": "图 14　案例 2 的三联图。 分离代理正好压在阈值上，弯度位置 P 也顶在参数范围上界。",
+   "source": "论文图 14",
+   "original": "fig14_case2.png"
+  },
+  {
+   "file": "fig15.webp",
+   "title": "案例 3 的三联图",
+   "caption": "图 15　案例 3 的三联图。 10 度时前缘吸力峰极强，升力在偏离设计攻角后塌陷。",
+   "source": "论文图 15",
+   "original": "fig15_case3.png"
+  },
+  {
+   "file": "fig16.webp",
+   "title": "案例 4 的三联图",
+   "caption": "图 16　案例 4 的三联图。 带内损失最大，升力随攻角变化过陡。",
+   "source": "论文图 16",
+   "original": "fig16_case4.png"
+  },
+  {
+   "file": "fig17.webp",
+   "title": "案例 5 的三联图",
+   "caption": "图 17　案例 5 的三联图。 不贴任何参数边界，带内损失最小，是五个案例里最稳的。",
+   "source": "论文图 17",
+   "original": "fig17_case5.png"
+  },
+  {
+   "file": "fig18.webp",
+   "title": "五个案例在 8 度攻角下的流场",
+   "caption": "图 18　五个案例在 8 度攻角下的流场。 上排是压力场，下排是速度大小场，同一排共用色标。",
+   "source": "论文图 18",
+   "original": "fig18_fields_all.png"
+  },
+  {
+   "file": "fig19.webp",
+   "title": "成功案例在 4、8、10 度的压力场，以及失败案例在 8 度与 10 度的对比",
+   "caption": "图 19　成功案例在 4、8、10 度的压力场，以及失败案例在 8 度与 10 度的对比。",
+   "source": "论文图 19",
+   "original": "fig19_field_aoa.png"
+  },
+  {
+   "file": "fig20.webp",
+   "title": "新设计与数据库里两个最好真实翼型的对照",
+   "caption": "图 20　新设计与数据库里两个最好真实翼型的对照。 上排是形状，下排是同一色标的 8 度压力场。",
+   "source": "论文图 20",
+   "original": "fig20_db_compare.png"
+  },
+  {
+   "file": "fig21.webp",
+   "title": "两个反演实例",
+   "caption": "图 21　两个反演实例。 上排真形状是正常弯，下排真形状是反弯。左列是目标曲线、反演解曲线、真形状曲线；中列是反演收敛过程，虚线是模型地板；右列是参数恢复情况。",
+   "source": "论文图 21",
+   "original": "fig21_inversion.png"
+  },
+  {
+   "file": "fig22.webp",
+   "title": "反演的多解性",
+   "caption": "图 22　反演的多解性。 左：不同容差下的等价解个数；右：等价形状的参数散布。",
+   "source": "论文图 22",
+   "original": "fig22_multisolution.png"
+  },
+  {
+   "file": "fig23.webp",
+   "title": "模型可信度核对",
+   "caption": "图 23　模型可信度核对。 左：模型升力与数据库升力逐样本对照；中：按真值升力分十档的平均偏差；右：设计点附近最近 12 个真实样本的核对。",
+   "source": "论文图 23",
+   "original": "fig23_anchor.png"
+  }
+ ],
+ "note": "图片由论文插图转成 WebP，宽度上限 1400 像素；最前面 16 张为「真值 / 官方 GNN / 本作品」三列场对比。"
+}

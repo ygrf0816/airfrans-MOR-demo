@@ -1,0 +1,144 @@
+.shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  padding: var(--sp-3) var(--sp-5);
+  border-bottom: 1px solid var(--line);
+  background: rgba(10, 14, 24, 0.82);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.shell-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+}
+
+.shell-title h1 {
+  font-size: var(--fs-4);
+  letter-spacing: 0.02em;
+}
+
+.shell-title .sub {
+  font-size: var(--fs-1);
+  color: var(--fg-2);
+}
+
+.shell-nav {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.nav-btn {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--fg-1);
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: 999px;
+  font-size: var(--fs-2);
+}
+
+.nav-btn.active {
+  background: var(--acc-dim);
+  border-color: var(--acc-line);
+  color: var(--acc-strong);
+  box-shadow: var(--glow-1);
+}
+
+.shell-main {
+  flex: 1;
+  padding: var(--sp-4) var(--sp-5);
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .shell-main {
+    padding: var(--sp-3);
+  }
+}
+
+/* 设置面板：抽屉式 */
+.settings-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 5, 10, 0.6);
+  z-index: 40;
+}
+
+.settings-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: min(420px, 92vw);
+  background: var(--bg-1);
+  border-left: 1px solid var(--line);
+  box-shadow: var(--sh-2);
+  z-index: 41;
+  padding: var(--sp-5);
+  display: grid;
+  gap: var(--sp-4);
+  align-content: start;
+  animation: slideIn var(--t-mid) ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.settings-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-panel label {
+  display: grid;
+  gap: var(--sp-1);
+  font-size: var(--fs-2);
+  color: var(--fg-1);
+}
+
+.settings-panel .row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-2);
+}
+
+.settings-note {
+  margin: 0;
+  font-size: var(--fs-1);
+  color: var(--warm);
+  border: 1px dashed var(--warm);
+  border-radius: var(--rd-1);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--warm-dim);
+}
+
+.settings-state {
+  margin: 0;
+  font-size: var(--fs-2);
+}

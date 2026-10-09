@@ -1,0 +1,129 @@
+{
+ "generatedAt": "2026-10-06",
+ "version": 1,
+ "entries": [
+  {
+   "name": "b_cp.onnx",
+   "kind": "model",
+   "sizeMb": 1.158,
+   "required": true,
+   "bytes": 1214583,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "b_field.onnx",
+   "kind": "model",
+   "sizeMb": 1.276,
+   "required": true,
+   "bytes": 1337950,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "cp_basis.json",
+   "kind": "basis",
+   "sizeMb": 0.036,
+   "required": true,
+   "bytes": 37942,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "field_basis.bin",
+   "kind": "basis",
+   "sizeMb": 15.643,
+   "required": true,
+   "bytes": 16402848,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "field_basis.json",
+   "kind": "basis",
+   "sizeMb": 0.001,
+   "required": true,
+   "bytes": 578,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "grid.json",
+   "kind": "grid",
+   "sizeMb": 0.01,
+   "required": true,
+   "bytes": 10139,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "samples.json",
+   "kind": "samples",
+   "sizeMb": 0.267,
+   "required": true,
+   "bytes": 279582,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "samples_geom.bin",
+   "kind": "samples",
+   "sizeMb": 0.488,
+   "required": true,
+   "bytes": 512000,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "samples_cp.bin",
+   "kind": "samples",
+   "sizeMb": 0.977,
+   "required": true,
+   "bytes": 1024000,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "samples_alpha.bin",
+   "kind": "samples",
+   "sizeMb": 0.519,
+   "required": true,
+   "bytes": 544000,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "cases_field.bin",
+   "kind": "cases",
+   "sizeMb": 5.688,
+   "required": true,
+   "bytes": 5964672,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "cases_field.json",
+   "kind": "cases",
+   "sizeMb": 0.006,
+   "required": true,
+   "bytes": 6543,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "results.json",
+   "kind": "results",
+   "sizeMb": 0.594,
+   "required": true,
+   "bytes": 622893,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "geom_fixture.json",
+   "kind": "basis",
+   "sizeMb": 0.442,
+   "required": false,
+   "bytes": 463886,
+   "source": "04_results/demo/tools/"
+  },
+  {
+   "name": "figs/",
+   "kind": "image",
+   "sizeMb": 0.902,
+   "required": true,
+   "bytes": 945666,
+   "count": 23,
+   "source": "04_results/paper/figs"
+  }
+ ],
+ "totalMb": 28.01,
+ "note": "资产清单，供前端核对与容量检查"
+}

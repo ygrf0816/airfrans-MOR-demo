@@ -1,0 +1,976 @@
+/* 四个页面共用的布局样式。 */
+
+.page {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.page-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+.page-head h2 {
+  font-size: var(--fs-4);
+}
+
+.page-head .hint {
+  font-size: var(--fs-2);
+  color: var(--fg-2);
+}
+
+/* 三栏：左控件 中形状 右图表 */
+.cols-3 {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: var(--sp-4);
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .cols-3 {
+    grid-template-columns: 260px minmax(0, 1fr);
+  }
+  .cols-3 .span-2 {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .cols-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.cols-2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--sp-4);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .cols-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.panel {
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  border: 1px solid var(--line);
+  border-radius: var(--rd-2);
+  box-shadow: var(--sh-1);
+  padding-bottom: var(--sp-3);
+  overflow: hidden;
+}
+
+.panel-body {
+  padding: var(--sp-2) var(--sp-4) 0;
+}
+
+.panel-title {
+  font-size: var(--fs-1);
+  color: var(--fg-2);
+  letter-spacing: 0.1em;
+  padding: var(--sp-3) var(--sp-4) var(--sp-1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+/* 控件 */
+.ctl {
+  display: grid;
+  gap: var(--sp-1);
+  padding: var(--sp-2) var(--sp-4);
+}
+
+.ctl .ctl-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: var(--fs-2);
+}
+
+.ctl .ctl-val {
+  font-family: var(--mono);
+  color: var(--acc-strong);
+  font-size: var(--fs-2);
+}
+
+.ctl .ctl-note {
+  font-size: var(--fs-1);
+  color: var(--fg-2);
+  line-height: var(--lh-1);
+}
+
+.ctl input[type='range'] {
+  width: 100%;
+}
+
+.seg {
+  display: flex;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+}
+
+.seg button {
+  flex: 1;
+  font-size: var(--fs-2);
+}
+
+.seg button.active {
+  background: var(--acc-dim);
+  border-color: var(--acc-line);
+  color: var(--acc-strong);
+}
+
+/* 指标卡 */
+@media (max-width: 1100px) {
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-4);
+}
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.card {
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  border: 1px solid var(--line);
+  border-radius: var(--rd-2);
+  padding: var(--sp-3) var(--sp-4);
+  display: grid;
+  gap: var(--sp-1);
+}
+
+.card .card-label {
+  font-size: var(--fs-1);
+  color: var(--fg-2);
+}
+
+.card .card-val {
+  font-family: var(--mono);
+  font-size: var(--fs-5);
+  color: var(--fg-0);
+}
+
+.card.ok .card-val {
+  color: var(--ok);
+}
+
+.card.bad {
+  border-color: rgba(248, 113, 113, 0.5);
+}
+
+.card.bad .card-val {
+  color: var(--bad);
+}
+
+.card .card-note {
+  font-size: var(--fs-1);
+  color: var(--fg-2);
+}
+
+.card .limit-bar {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--bg-3);
+  position: relative;
+  overflow: hidden;
+  margin-top: var(--sp-1);
+}
+
+.card .limit-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 2px;
+  background: var(--acc);
+  transition: width var(--t-mid);
+}
+
+.card.bad .limit-fill {
+  background: var(--bad);
+}
+
+/* 压缩链路（前向预测页标题下） */
+.pipeline {
+  display: flex;
+  align-items: stretch;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+.pipe-block {
+  flex: 1;
+  min-width: 200px;
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  border: 1px solid var(--acc-line);
+  border-radius: var(--rd-2);
+  padding: var(--sp-3) var(--sp-4);
+  display: grid;
+  gap: 2px;
+}
+
+.pipe-big {
+  font-size: var(--fs-5);
+  font-weight: 700;
+  color: var(--acc-strong);
+}
+
+/* 创新点，按用户要求放大到块内正文的一点九倍并标红。
+   必须带 .num 一起写，否则会被 index.css 里 .num 的颜色盖掉。 */
+.pipe-big.num.pipe-hero {
+  font-size: calc(var(--fs-2) * 1.9);
+  font-weight: 800;
+  color: #ff5a5f;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 12px rgba(255, 90, 95, 0.35);
+}
+
+.pipe-small {
+  font-size: var(--fs-2);
+  color: var(--fg-0);
+}
+
+.pipe-note {
+  font-size: var(--fs-1);
+  color: var(--fg-2);
+  line-height: var(--lh-1);
+}
+
+.pipe-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--acc);
+  font-size: 20px;
+  font-weight: 700;
+  gap: 2px;
+}
+
+.pipe-arrow span {
+  font-size: var(--fs-1);
+  color: var(--fg-1);
+  font-weight: 400;
+  writing-mode: horizontal-tb;
+}
+
+/* 前向预测页主网格：左控件 中形状 右结果区 */
+.fwd-grid {
+  display: grid;
+  /* 四列：形状参数、翼型形状、压力曲线、指标卡。
+     形状参数与指标卡跨两行，流场云图落在第二行横跨中间两列，
+     这样翼型形状下方那块空白就被流场填满了。 */
+  grid-template-columns: 264px minmax(0, 0.9fr) minmax(0, 1.45fr) 196px;
+  gap: var(--sp-4);
+  align-items: start;
+}
+
+@media (max-width: 1300px) {
+  .fwd-grid {
+    grid-template-columns: 250px minmax(0, 1fr);
+  }
+  .fwd-grid > div:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .fwd-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* 指标卡竖排一列 */
+.cards-col {
+  display: grid;
+  gap: var(--sp-3);
+  align-content: start;
+}
+
+/* 可解释性分析页 */
+
+.ex-sub {
+  font-size: var(--fs-1);
+  color: var(--fg-2);
+  margin-bottom: 6px;
+}
+
+.ex-note {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--fg-1);
+}
+
+.ex-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.ex-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--fg-2);
+  font-size: var(--fs-1);
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.ex-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg-0);
+}
+
+.ex-table td.num {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  text-align: right;
+}
+
+.ex-chip {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: var(--fs-1);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ex-chip.ok {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.ex-chip.bad {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.ex-check {
+  border: 1px solid var(--line);
+  border-radius: var(--rd-1);
+  background: var(--bg-3);
+  padding: var(--sp-3);
+  display: grid;
+  gap: 8px;
+}
+
+.ex-check-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+.ex-check-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--fg-0);
+}
+
+.ex-check-body {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--fg-1);
+}
+
+.ex-warn {
+  color: #fbbf24;
+}
+
+.ex-retract {
+  border-left: 2px solid var(--line);
+  padding-left: var(--sp-3);
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.ex-retract-wrong,
+.ex-retract-right {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.ex-retract-wrong {
+  color: var(--fg-2);
+  text-decoration: line-through;
+  text-decoration-color: rgba(248, 113, 113, 0.5);
+}
+
+.ex-retract-right {
+  color: var(--fg-0);
+}
+
+.ex-retract-tag {
+  flex: 0 0 auto;
+  font-size: var(--fs-1);
+  font-weight: 700;
+  padding: 0 6px;
+  border-radius: var(--rd-1);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.ex-retract-tag.ok {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.12);
+}
+
+.ex-retract-tag.bad {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.12);
+}
+
+.mor-flow {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1.3fr;
+  gap: var(--sp-4);
+  align-items: stretch;
+  margin-bottom: var(--sp-4);
+}
+.mor-flow-mid {
+  position: relative;
+  display: grid;
+  align-content: stretch;
+}
+.mor-panel {
+  background: linear-gradient(180deg, rgba(16, 22, 39, 0.9), rgba(10, 14, 24, 0.9));
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: grid;
+  gap: var(--sp-2);
+  align-content: start;
+  overflow: hidden;
+  height: 100%;
+}
+.mor-panel-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mor-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1.5px solid currentColor;
+  flex: none;
+}
+.mor-chip {
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  padding: 3px 2px;
+  border: 1px solid var(--line-soft);
+  border-radius: 7px;
+  background: rgba(34, 211, 238, 0.05);
+}
+.mor-panel canvas {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+}
+.mor-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: grid;
+  justify-items: center;
+  gap: 0;
+  pointer-events: none;
+}
+.mor-flow-mid > .mor-arrow:first-child { left: -14px; }
+.mor-flow-mid > .mor-arrow:last-child { right: -14px; }
+.mor-arrow span {
+  font-size: 9px;
+  color: var(--fg-2);
+  white-space: nowrap;
+  background: var(--bg-1);
+  padding: 1px 4px;
+  border-radius: 4px;
+  border: 1px solid var(--line-soft);
+}
+.mor-arrow::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  background: #67e8f9;
+  clip-path: polygon(0 35%, 60% 35%, 60% 15%, 100% 50%, 60% 85%, 60% 65%, 0 65%);
+  filter: drop-shadow(0 0 3px rgba(103, 232, 249, 0.7));
+  z-index: -1;
+}
+
+/* ---- 主页背景知识卡片里的三张图 ---- */
+.home-figs {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: var(--sp-4);
+  align-items: start;
+}
+.home-fig {
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+.home-fig img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  display: block;
+}
+/* 翼型几何图是线稿，用 contain 不要裁切 */
+.home-fig:nth-child(3) img {
+  object-fit: contain;
+  padding: 6px;
+  background: var(--bg-1);
+}
+.home-fig figcaption {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--fg-1);
+}
+.home-src {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--fg-2);
+}
+@media (max-width: 900px) {
+  .home-figs { grid-template-columns: 1fr; }
+}
+
+/* ---- 降维原理图：导语 / 为什么 / 公式 ---- */
+.mor-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3) var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-3);
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.07), rgba(16, 22, 39, 0.6));
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--fg-1);
+}
+.mor-intro-tag {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 1px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #05070d;
+  background: var(--acc);
+}
+.mor-intro-a .mor-intro-tag {
+  background: var(--acc-strong);
+}
+.mor-intro-num {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--line-soft);
+  font-size: 14px;
+}
+.mor-intro-num b {
+  font-size: 20px;
+  color: var(--acc-strong);
+}
+.mor-intro-arrow {
+  color: var(--fg-2);
+  font-size: 16px;
+}
+.mor-intro-win {
+  color: var(--ok);
+  font-weight: 700;
+}
+.mor-formula {
+  margin-top: var(--sp-2);
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(34, 211, 238, 0.06);
+  border: 1px dashed var(--acc-line);
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--fg-1);
+  text-align: center;
+}
+.mor-mean { color: var(--acc-strong); font-weight: 700; }
+.mor-plus { color: var(--fg-2); margin: 0 2px; }
+.mor-why {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+  margin-top: var(--sp-3);
+}
+.mor-why-col {
+  padding: var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-2);
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--fg-1);
+}
+.mor-why-h {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+@media (max-width: 1200px) {
+  .mor-why { grid-template-columns: 1fr; }
+  .mor-intro { grid-template-columns: 1fr; }
+}
+
+/* ---- 可解释性页：方法说明 / 插图 / 猜想判定 ---- */
+.ex-method {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+}
+.ex-method-col {
+  padding: var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-2);
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--fg-1);
+}
+.ex-method-h {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.ex-method-col .muted { display: block; margin-top: 4px; font-size: 12.5px; }
+
+.ex-fig {
+  margin: var(--sp-3) 0 0;
+  display: grid;
+  gap: 6px;
+}
+.ex-fig img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--bg-1);
+  display: block;
+}
+.ex-fig figcaption {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--fg-1);
+}
+.ex-fig-num {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 7px;
+  border-radius: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #05070d;
+  background: var(--acc);
+}
+
+.ex-guess {
+  display: grid;
+  gap: 8px;
+}
+.ex-guess-row {
+  display: grid;
+  grid-template-columns: 118px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-2);
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--fg-1);
+}
+.ex-guess-tag {
+  display: inline-block;
+  text-align: center;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.ex-guess-tag.ok {
+  color: var(--ok);
+  background: var(--ok-dim, rgba(52, 211, 153, 0.14));
+  border: 1px solid var(--ok);
+}
+.ex-guess-tag.bad {
+  color: var(--warm);
+  background: var(--warm-dim, rgba(251, 146, 60, 0.14));
+  border: 1px solid var(--warm);
+}
+@media (max-width: 1100px) {
+  .ex-method { grid-template-columns: 1fr; }
+  .ex-guess-row { grid-template-columns: 1fr; }
+}
+
+/* ---- 可解释性页：前端矢量绘制的数据图 ---- */
+.ex-figdata {
+  margin: var(--sp-3) 0;
+}
+.ex-figdata-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-3);
+}
+.ex-figdata-cell {
+  display: grid;
+  gap: 4px;
+  padding: var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(16, 22, 39, 0.85), rgba(10, 14, 24, 0.85));
+}
+.ex-figdata-cap {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--acc-strong);
+}
+.ex-figdata-cell canvas {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+}
+.ex-figdata-note {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--fg-2);
+}
+
+/* 交互作用条形图 */
+.ex-bars {
+  display: grid;
+  gap: 6px;
+  margin-top: 4px;
+}
+.ex-bar-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 44px;
+  gap: 8px;
+  align-items: center;
+  font-size: 12.5px;
+}
+.ex-bar-label {
+  color: var(--fg-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ex-bar-track {
+  position: relative;
+  display: block;
+  height: 12px;
+  border-radius: 4px;
+  background: rgba(34, 211, 238, 0.08);
+  overflow: hidden;
+}
+.ex-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  transition: width 200ms;
+}
+.ex-bar-threshold {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 0;
+  border-left: 1px dashed var(--fg-2);
+  opacity: 0.85;
+}
+.ex-bar-val {
+  text-align: right;
+}
+@media (max-width: 1200px) {
+  .ex-figdata-grid { grid-template-columns: 1fr; }
+  .ex-bar-row { grid-template-columns: 110px 1fr 40px; }
+}
+
+/* ---- 反向设计：三代表案例 ---- */
+.inv-case {
+  display: grid;
+  /* 关键：卡片自身的隐式列必须能被压缩到可用宽度。
+     否则里面的 nowrap 内容（数值、勾叉、参照小字）会把列撑到 max-content，
+     在窄卡片里就会溢出到框外。 */
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  padding: var(--sp-3);
+  border: 1px solid var(--line);
+  border-left: 3px solid currentColor;   /* 左侧色条；不影响内容盒宽度计算 */
+  border-radius: 10px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, rgba(16, 22, 39, 0.9), rgba(10, 14, 24, 0.9));
+  overflow: hidden;
+}
+.inv-case-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.inv-case-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #05070d;
+}
+.inv-case-feasible { font-size: 12.5px; font-weight: 700; }
+.inv-case-desc { font-size: 12.5px; line-height: 1.6; color: var(--fg-2); min-height: 34px; }
+.inv-case canvas { display: block; width: 100%; }
+.inv-case-params {
+  font-size: 11.5px;
+  color: var(--fg-2);
+  font-family: "JetBrains Mono", monospace;
+  text-align: center;
+}
+.inv-case-reason {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--fg-2);
+  border-top: 1px solid var(--line-soft);
+  padding-top: 5px;
+}
+
+.inv-case-rows {
+  display: grid;
+  gap: 5px;
+  margin-top: 2px;
+  min-width: 0;
+  max-width: 100%;
+}
+.inv-case-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  grid-template-areas: "k v" "ref ref";
+  align-items: baseline;
+  column-gap: 8px;
+  row-gap: 0;
+  font-size: 12.5px;
+  min-width: 0;
+  max-width: 100%;
+}
+.inv-case-k {
+  grid-area: k;
+  color: var(--fg-2);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.inv-case-v {
+  grid-area: v;
+  justify-self: end;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  white-space: nowrap;
+}
+.inv-case-mark {
+  font-weight: 700;
+  font-size: 12px;
+  min-width: 11px;
+  text-align: center;
+}
+.inv-case-ref {
+  grid-area: ref;
+  justify-self: end;
+  font-size: 10.5px;
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+
+
+/* 交互条形图：变量名下方的小字说明 */
+.ex-bar-sub {
+  display: block;
+  font-size: 11px;
+  color: var(--fg-2);
+  text-align: center;
+  line-height: 1.4;
+}
+.ex-bar-label { text-align: center; white-space: normal; overflow: visible; }
+
+/* 反向设计三案例：标签与数值分列，避免数值与勾叉溢出框外 */
+
+/* 修正：三案例指标行与卡片内容区对齐，避免数值列压到内边距甚至框外 */
+
+/* 修正：指标行改为三行栅格（标签+数值 | 参照），数值与勾叉整体左移并留出右边距 */
+
+/* 压缩链路条下方的速度说明：按用户要求红色加粗。
+   红色沿用本页创新点用的同一个 #ff5a5f，保持视觉一致。 */
+.pipe-speed {
+  margin: var(--sp-3) 0 0;
+  padding: var(--sp-2) var(--sp-3);
+  border-left: 3px solid #ff5a5f;
+  border-radius: 6px;
+  background: rgba(255, 90, 95, 0.08);
+  font-size: calc(var(--fs-2) * 1.15);
+  font-weight: 700;
+  line-height: 1.75;
+  color: #ff5a5f;
+}
+.pipe-speed b {
+  font-weight: 800;
+  color: #ff8a8d;
+}
+.pipe-speed-hero {
+  font-size: calc(var(--fs-2) * 1.5);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 12px rgba(255, 90, 95, 0.35);
+}

@@ -1,0 +1,41 @@
+name: Deploy demo to GitHub Pages
+
+# 站点是纯静态的，构建产物已经随仓库提交在 site/ 下，CI 只负责发布，
+# 不重新构建前端（重建资产需要 14.3 GB 的上游数据集与 GPU，不适合放进 CI）。
+# 要更新站点，本地按 README「重新构建站点」一节刷新 site/ 后再提交。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site/ as Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy
+        id: deploy
+        uses: actions/deploy-pages@v4

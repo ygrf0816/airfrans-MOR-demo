@@ -1,0 +1,255 @@
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T07:34:13.940Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T07:36:25.088Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T07:49:38.482Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T07:49:51.506Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T08:16:05.688Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T11:12:22.398Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T11:12:35.824Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T11:26:16.607Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T11:26:17.203Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T12:04:30.923Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T12:04:31.450Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T12:17:24.524Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T12:17:25.146Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T12:24:21.479Z
+=== geom check run ===
+OK  5d_q0_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_d     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q0_e     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_a     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_b     maxDiff=0.0000e+0  (tol 1e-9)
+OK  5d_q1_c     maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_a        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_b        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_c        maxDiff=0.0000e+0  (tol 1e-9)
+OK  4d_d        maxDiff=0.0000e+0  (tol 1e-9)
+
+verdict: PASS all 12 items < 1e-9
+fixture: E:\workspace\agnes-hackathon\10_airfrans\04_results\demo\app\public\data\geom_fixture.json
+run at: 2026-10-06T13:30:08.033Z
