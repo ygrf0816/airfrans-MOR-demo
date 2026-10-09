@@ -1,6 +1,6 @@
 # AirfRANS 可交互演示
 
-**在线体验：<https://ygrf0816.github.io/airfrans-demo/>**
+**在线体验：<https://ygrf0816.github.io/airfrans-MOR-demo/>**
 
 纯静态的翼型气动演示站。模型推理全部在访问者的浏览器里由 ONNX Runtime 的
 WebAssembly 后端完成，没有后端服务、不联网取数、也不需要显卡。
