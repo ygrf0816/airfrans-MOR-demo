@@ -13,7 +13,7 @@ from train_B_transformer import BBackbone, cp_from_alpha, POD_R  # noqa: E402
 from geometry_input import load_all_geometric, input_vector_5scalar  # noqa: E402
 from runkit import RunDir  # noqa: E402
 
-TASK_ROOT = "/home/zch/airfrans/data/Dataset"
+TASK_ROOT = "/home/user/airfrans/data/Dataset"
 
 
 def load_B_from_weight(task, device="cpu"):
@@ -52,9 +52,9 @@ if __name__ == "__main__":
         b = load_B_from_weight(task)
         cp_pred = predict_B(b, te)
         # 真值：从 wallcp npz 取
-        pod = np.load(b.get("npz", "/home/zch/airfrans/pod/wallcp_1000.npz"),
+        pod = np.load(b.get("npz", "/home/user/airfrans/pod/wallcp_1000.npz"),
                       allow_pickle=True) if False else None
-        cp_all = np.load("/home/zch/airfrans/pod/wallcp_1000.npz",
+        cp_all = np.load("/home/user/airfrans/pod/wallcp_1000.npz",
                          allow_pickle=True)
         names_all = cp_all["names"].tolist()
         CP = cp_all["CP"]

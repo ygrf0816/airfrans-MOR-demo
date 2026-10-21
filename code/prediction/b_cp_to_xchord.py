@@ -79,10 +79,10 @@ def b_curve_to_xchord(name, task_root, b_cp256, n_out=64):
 
 def main():
     import json
-    task_root = "/home/zch/airfrans/data/Dataset"
-    pod = np.load("/home/zch/airfrans/pod/wallcp_1000.npz", allow_pickle=True)
+    task_root = "/home/user/airfrans/data/Dataset"
+    pod = np.load("/home/user/airfrans/pod/wallcp_1000.npz", allow_pickle=True)
     CP, names = pod["CP"], pod["names"].tolist()
-    man = json.load(open("/home/zch/airfrans/data/manifest.json", encoding="utf-8"))
+    man = json.load(open("/home/user/airfrans/data/manifest.json", encoding="utf-8"))
     for nm in man["full_test"][:3]:
         i = names.index(nm)
         xs, up, lo, x0, x1 = b_curve_to_xchord(nm, task_root, CP[i])

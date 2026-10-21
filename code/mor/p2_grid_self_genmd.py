@@ -44,7 +44,7 @@ p_recon = float(d['p_recon_self'])
 u_recon = float(d['u_recon_self'])
 
 # 对照：overnight npz（仅数量级）
-OVERR = r'C:\Users\Administrator\AppData\Local\Temp\agh-bridge\overnight'
+OVERR = os.path.join(os.environ.get("TEMP", "."), "agh-bridge", "overnight")
 ov = {}
 ovp = os.path.join(OVERR, 'mor2_fields.npz')
 if os.path.exists(ovp):

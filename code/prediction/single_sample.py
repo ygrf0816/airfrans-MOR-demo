@@ -15,7 +15,7 @@ import numpy as np
 import pyvista as pv
 from scipy.spatial import cKDTree
 
-TASK_ROOT = "/home/zch/airfrans/data/Dataset"
+TASK_ROOT = "/home/user/airfrans/data/Dataset"
 
 
 def decode_sim(name):

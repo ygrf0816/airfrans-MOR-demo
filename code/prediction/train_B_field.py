@@ -19,9 +19,9 @@
 
 用法：
   python train_B_field.py --task full  --device cuda:0 \
-     --cache /home/zch/airfrans/pod/vol_fields_1000.npz \
-     --manifest /home/zch/airfrans/data/manifest.json \
-     --task-root /home/zch/airfrans/data/Dataset --epochs 3000 --patience 300
+     --cache /home/user/airfrans/pod/vol_fields_1000.npz \
+     --manifest /home/user/airfrans/data/manifest.json \
+     --task-root /home/user/airfrans/data/Dataset --epochs 3000 --patience 300
 """
 import os, sys, json, argparse, random
 import numpy as np
@@ -206,9 +206,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--task", required=True, choices=["full", "scarce", "reynolds", "aoa"])
     ap.add_argument("--device", default="cuda:0")
-    ap.add_argument("--cache", default="/home/zch/airfrans/pod/vol_fields_1000.npz")
-    ap.add_argument("--manifest", default="/home/zch/airfrans/data/manifest.json")
-    ap.add_argument("--task-root", default="/home/zch/airfrans/data/Dataset")
+    ap.add_argument("--cache", default="/home/user/airfrans/pod/vol_fields_1000.npz")
+    ap.add_argument("--manifest", default="/home/user/airfrans/data/manifest.json")
+    ap.add_argument("--task-root", default="/home/user/airfrans/data/Dataset")
     ap.add_argument("--runs-a", default=os.path.join(
         ROOT, "04_results", "prediction", "runs"),
         help="A 链路的 runs 目录（用于取官方 coef_norm 与 A 的指标做对标）")
@@ -226,7 +226,7 @@ def main():
     ap.add_argument("--representation", choices=["grid", "bodyfit"], default="grid",
                     help="grid=原 256x128 均匀网格；bodyfit=笛卡尔网格 + 贴体近壁 (s,d) 带")
     ap.add_argument("--bodyfit-cache",
-                    default="/home/zch/airfrans/pod/vol_fields_bodyfit_1000.npz")
+                    default="/home/user/airfrans/pod/vol_fields_bodyfit_1000.npz")
     ap.add_argument("--max-eval-samples", type=int, default=0,
                     help="网格回读评估只用前 N 个测试样本（0=全部）；快速自检用")
     args = ap.parse_args()

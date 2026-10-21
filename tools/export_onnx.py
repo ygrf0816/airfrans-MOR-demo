@@ -3,9 +3,9 @@
 """把两个 PyTorch 模型导出成 ONNX，供浏览器 ONNX Runtime Web 使用。
 
 在工作站上跑（本地没有 torch）：
-  /home/zch/.conda/envs/pytorch/bin/python export_onnx.py \
-      --root /home/zch/airfrans \
-      --out  /home/zch/airfrans/04_results/demo/data_remote
+  /home/user/.conda/envs/pytorch/bin/python export_onnx.py \
+      --root /home/user/airfrans \
+      --out  /home/user/airfrans/04_results/demo/data_remote
 
 产物：
   b_cp.onnx             压力曲线模型，输入 [1,133] 输出 [1,8]
@@ -26,7 +26,7 @@ import numpy as np
 import torch
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--root", default="/home/zch/airfrans")
+ap.add_argument("--root", default="/home/user/airfrans")
 ap.add_argument("--pred", default=None, help="prediction 代码目录，默认 <root>/prediction")
 ap.add_argument("--run-cp", default=None, help="压力曲线模型 run 目录")
 ap.add_argument("--run-field", default=None, help="流场模型 run 目录")

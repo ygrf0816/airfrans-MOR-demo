@@ -33,9 +33,9 @@ import b_cp_to_xchord as bx  # noqa: E402
 
 FIGDIR = os.path.join(_HERE, "04_results", "prediction", "figs")
 os.makedirs(FIGDIR, exist_ok=True)
-WALLCP_NPZ = "/home/zch/airfrans/pod/wallcp_1000.npz"
-VOL_FIELDS_NPZ = "/home/zch/airfrans/pod/vol_fields_1000.npz"
-BFIELD_BASIS_NPZ = "/home/zch/airfrans/pod/bfield_basis.npz"
+WALLCP_NPZ = "/home/user/airfrans/pod/wallcp_1000.npz"
+VOL_FIELDS_NPZ = "/home/user/airfrans/pod/vol_fields_1000.npz"
+BFIELD_BASIS_NPZ = "/home/user/airfrans/pod/bfield_basis.npz"
 TASKS = ["full", "scarce", "reynolds", "aoa"]
 N_SAMP = 6
 SEED = 20261004

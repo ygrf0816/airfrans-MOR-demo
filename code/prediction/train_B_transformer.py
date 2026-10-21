@@ -22,17 +22,17 @@ from geometry_input import load_all_geometric, input_vector_5scalar, N_STATION  
 from runkit import RunDir, smoke_gate, is_nan  # noqa: E402
 
 # ROOT 解析：本地仓库布局是 <repo>/03_code/prediction/，故 _HERE/../.. 是仓库根；
-# 但工作站上是 /home/zch/airfrans/prediction/，_HERE/../.. 会算成 /home/zch（错）。
+# 但工作站上是 /home/user/airfrans/prediction/，_HERE/../.. 会算成 /home/user（错）。
 # 这里改成逐个候选探测，谁存在用谁，避免路径写死后在另一个环境直接报错。
 def _resolve_root():
     """返回含 04_results 的仓库根。
     本地布局: <root>/03_code/prediction/ 与 <root>/04_results
-    工作站:   /home/zch/airfrans/{prediction,data,pod}，评估产物在 prediction/04_results
+    工作站:   /home/user/airfrans/{prediction,data,pod}，评估产物在 prediction/04_results
     故两边都可能有 04_results，两个位置都探。
     """
     cands = [
         os.path.normpath(os.path.join(_HERE, "..", "..")),          # 本地仓库根
-        "/home/zch/airfrans",                                         # 工作站根
+        "/home/user/airfrans",                                         # 工作站根
         _HERE,                                                        # 就是 prediction/ 本身
     ]
     for c in cands:
@@ -51,7 +51,7 @@ ROOT = _resolve_root()
 # 壁面 Cp 全量 npz：优先仓库内 04_results/mor，其次工作站 pod 目录
 _ANS_CANDS = [
     os.path.join(ROOT, "04_results", "mor", "p2_wallcp_anchored.npz"),
-    "/home/zch/airfrans/pod/wallcp_1000.npz",
+    "/home/user/airfrans/pod/wallcp_1000.npz",
 ]
 for _c in _ANS_CANDS:
     if os.path.exists(_c):
@@ -67,7 +67,7 @@ SEED = 0
 _TASKROOT_CANDS = [
     os.path.join(ROOT, "02_dataset", "Dataset"),
     os.path.join(ROOT, "data", "Dataset"),
-    "/home/zch/airfrans/data/Dataset",
+    "/home/user/airfrans/data/Dataset",
 ]
 for _c in _TASKROOT_CANDS:
     if os.path.isdir(_c):
@@ -381,13 +381,13 @@ def main():
     ap.add_argument("--init-from", default=None)
     ap.add_argument("--hidden", type=int, default=256)
     ap.add_argument("--wallcp-npz", default=None,
-                    help="壁面 Cp 全量 npz（工作站 /home/zch/airfrans/pod/wallcp_1000.npz）")
+                    help="壁面 Cp 全量 npz（工作站 /home/user/airfrans/pod/wallcp_1000.npz）")
     ap.add_argument("--official-coefs", default=None,
                     help="官方真值 C_L/C_D 缓存 npz（official_coefs_1000.npz）；"
                          "缺省时与 --wallcp-npz 同目录")
     ap.add_argument("--manifest", default=None)
     ap.add_argument("--task-root", default=None,
-                    help="Dataset 根目录（工作站 /home/zch/airfrans/data/Dataset）")
+                    help="Dataset 根目录（工作站 /home/user/airfrans/data/Dataset）")
     ap.add_argument("--smoke-only", action="store_true")
     ap.add_argument("--seed", type=int, default=SEED)
     args = ap.parse_args()

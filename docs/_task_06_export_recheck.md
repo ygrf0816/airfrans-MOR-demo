@@ -25,14 +25,14 @@
 远端执行：
 
 ```
-cd /home/zch/airfrans && nohup bash 04_results/demo/run_export_check.sh > 04_results/demo/run_export_check.out 2>&1 &
+cd /home/user/airfrans && nohup bash 04_results/demo/run_export_check.sh > 04_results/demo/run_export_check.out 2>&1 &
 ```
 
 这个脚本只跑自检并补写元信息，不重新导出 ONNX，大约一分钟就好。
 等一会再查一次，命令用这一条，一次问清：
 
 ```
-tail -n 40 /home/zch/airfrans/04_results/demo/run_export_check.out ; ls -l /home/zch/airfrans/04_results/demo/data_remote
+tail -n 40 /home/user/airfrans/04_results/demo/run_export_check.out ; ls -l /home/user/airfrans/04_results/demo/data_remote
 ```
 
 看到 `ALL_DONE` 就是完成了。

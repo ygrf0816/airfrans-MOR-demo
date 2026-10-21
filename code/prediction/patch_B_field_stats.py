@@ -31,13 +31,13 @@ sys.path.insert(0, _HERE)
 from geometry_input import geometric_vector, N_STATION      # noqa: E402
 from train_B_field import FIELDS, FieldMLP, build_inputs    # noqa: E402
 
-POD = "/home/zch/airfrans/pod"
+POD = "/home/user/airfrans/pod"
 GEOM_CACHE = os.path.join(POD, "geomvec_1000.npz")
 BASIS_NPZ = os.path.join(POD, "bfield_basis.npz")
 FIELD_CACHE = os.path.join(POD, "vol_fields_1000.npz")
-MANIFEST = "/home/zch/airfrans/data/manifest.json"
-TASK_ROOT = "/home/zch/airfrans/data/Dataset"
-RUNS = "/home/zch/airfrans/prediction/04_results/prediction/runs"
+MANIFEST = "/home/user/airfrans/data/manifest.json"
+TASK_ROOT = "/home/user/airfrans/data/Dataset"
+RUNS = "/home/user/airfrans/prediction/04_results/prediction/runs"
 TASKS = ["full", "scarce", "reynolds", "aoa"]
 VAL_FRAC = 0.1
 

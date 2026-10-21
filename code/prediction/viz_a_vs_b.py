@@ -27,8 +27,8 @@ def b_Uinf(name):
 FIGDIR = os.path.normpath(os.path.join(_HERE, "..", "..",
                                        "04_results", "prediction", "figs"))
 os.makedirs(FIGDIR, exist_ok=True)
-TASK_ROOT = "/home/zch/airfrans/data/Dataset"
-WALLCP_NPZ = "/home/zch/airfrans/pod/wallcp_1000.npz"
+TASK_ROOT = "/home/user/airfrans/data/Dataset"
+WALLCP_NPZ = "/home/user/airfrans/pod/wallcp_1000.npz"
 TASKS = ["full", "scarce", "reynolds", "aoa"]
 N_SAMP = 6
 SEED = 20261004

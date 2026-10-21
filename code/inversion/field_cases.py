@@ -13,7 +13,7 @@
   cases_field_summary.csv  case,aoa,p_min,p_max,u_max,nu_max
   cases_field_check.json   与已落盘 field_grid.npz 的自检相对差
 
-用法（工作站上）：/home/zch/.conda/envs/pytorch/bin/python field_cases.py
+用法（工作站上）：/home/user/.conda/envs/pytorch/bin/python field_cases.py
 """
 import json
 import os
@@ -22,7 +22,7 @@ import sys
 import numpy as np
 import torch
 
-ROOT = "/home/zch/airfrans"
+ROOT = "/home/user/airfrans"
 PRED = os.path.join(ROOT, "prediction")
 RUN = os.path.join(PRED, "04_results", "prediction", "runs", "full_B_field")
 OUT = os.path.join(ROOT, "04_results", "inversion", "results")

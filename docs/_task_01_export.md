@@ -4,7 +4,7 @@
 
 ## 事实，先看清楚
 
-- 工作站 Python 用 `/home/zch/.conda/envs/pytorch/bin/python`，项目根 `/home/zch/airfrans`。
+- 工作站 Python 用 `/home/user/.conda/envs/pytorch/bin/python`，项目根 `/home/user/airfrans`。
 - 传输用 `python 03_code/station/remote.py`，参数是
   `--put <本地文件> <远端目录>` 与 `--get <远端文件> <本地目录>`，
   另有一个 `--script <本地.sh>` 会上传后执行。用法先跑一次 `--help` 看。
@@ -26,7 +26,7 @@
 在远端执行下面这一条，命令会立刻返回：
 
 ```
-cd /home/zch/airfrans && nohup bash 04_results/demo/run_export.sh > 04_results/demo/run_export.out 2>&1 &
+cd /home/user/airfrans && nohup bash 04_results/demo/run_export.sh > 04_results/demo/run_export.out 2>&1 &
 ```
 
 注意这是远端命令，要经 `remote.py` 传过去。如果外层引号不好写，
@@ -39,8 +39,8 @@ cd /home/zch/airfrans && nohup bash 04_results/demo/run_export.sh > 04_results/d
 起完之后**等一会**再查，不要连查。查询只做这两件事，一次问清：
 
 1. 看进程还在不在，以及日志末尾：
-   `pgrep -af trim_field_basis ; pgrep -af export_onnx ; tail -n 40 /home/zch/airfrans/04_results/demo/run_export.out`
-2. 看产物清单：`ls -l /home/zch/airfrans/04_results/demo/data_remote`
+   `pgrep -af trim_field_basis ; pgrep -af export_onnx ; tail -n 40 /home/user/airfrans/04_results/demo/run_export.out`
+2. 看产物清单：`ls -l /home/user/airfrans/04_results/demo/data_remote`
 
 如果日志里出现了 `ALL_DONE`，说明两个脚本都跑完了。
 如果出现了 `Traceback`，把报错原文抄下来，**不要自己去改脚本**，报告给我。

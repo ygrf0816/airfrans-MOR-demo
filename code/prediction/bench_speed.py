@@ -23,8 +23,8 @@ from train_B_transformer import BBackbone, cp_from_alpha  # noqa: E402
 from geometry_input import load_all_geometric, input_vector_5scalar  # noqa: E402
 from single_sample import load_sample  # noqa: E402
 
-TASK_ROOT = "/home/zch/airfrans/data/Dataset"
-WALLCP = "/home/zch/airfrans/pod/wallcp_1000.npz"
+TASK_ROOT = "/home/user/airfrans/data/Dataset"
+WALLCP = "/home/user/airfrans/pod/wallcp_1000.npz"
 
 
 def timeit(fn, n=1, warmup=1):
@@ -147,7 +147,7 @@ def main():
         "train_total_sec": {"A": tot_a, "B": tot_b},
         "device": device,
     }
-    json.dump(out, open("/home/zch/airfrans/prediction/04_results/prediction/speed_benchmark.json",
+    json.dump(out, open("/home/user/airfrans/prediction/04_results/prediction/speed_benchmark.json",
                         "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("saved speed_benchmark.json")
     print("BENCH_DONE")

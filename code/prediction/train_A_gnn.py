@@ -410,7 +410,7 @@ def main():
     ap.add_argument("--lr", type=float, default=1e-3)
     ap.add_argument("--sub", type=int, default=SUBSAMP)
     ap.add_argument("--init-from", default=None)
-    ap.add_argument("--task-root", default="/home/zch/airfrans/data/Dataset")
+    ap.add_argument("--task-root", default="/home/user/airfrans/data/Dataset")
     ap.add_argument("--limit", type=int, default=None, help="冒烟 100")
     ap.add_argument("--seed", type=int, default=SEED,
                    help="多 seed 对照（官方跑 5 次报 mean±std，默认 0）")

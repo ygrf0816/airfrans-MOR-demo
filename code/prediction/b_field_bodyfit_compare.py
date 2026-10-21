@@ -14,7 +14,7 @@
 import os, json, argparse
 import numpy as np
 
-POD = "/home/zch/airfrans/pod"
+POD = "/home/user/airfrans/pod"
 TASKS = ["full", "scarce", "reynolds", "aoa"]
 FIELDS = ["u", "v", "p", "nu_t"]
 
@@ -25,8 +25,8 @@ def load(p):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--runs", default="/home/zch/airfrans/prediction/04_results/prediction/runs")
-    ap.add_argument("--out", default="/home/zch/airfrans/prediction/04_results/prediction/"
+    ap.add_argument("--runs", default="/home/user/airfrans/prediction/04_results/prediction/runs")
+    ap.add_argument("--out", default="/home/user/airfrans/prediction/04_results/prediction/"
                                      "B_field_bodyfit_comparison.json")
     ap.add_argument("--protocol", default=os.path.join(POD, "protocol_aligned_comparison.json"))
     args = ap.parse_args()

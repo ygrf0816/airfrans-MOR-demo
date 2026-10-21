@@ -40,7 +40,7 @@ import time
 import numpy as np
 import torch
 
-ROOT = "/home/zch/airfrans"
+ROOT = "/home/user/airfrans"
 PRED = f"{ROOT}/prediction"
 OUT = f"{ROOT}/04_results/inversion/results"
 POD = f"{ROOT}/pod"

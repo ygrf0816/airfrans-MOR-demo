@@ -4,7 +4,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 import warnings; warnings.filterwarnings("ignore")
 
 # overnight wallcp.npz (cross-check ONLY - magnitude) vs my self-computed
-ov = os.path.join("C:/Users/Administrator/AppData/Local/Temp/agh-bridge/overnight", "wallcp.npz")
+ov = os.path.join("<LOCAL_TEMP>/agh-bridge/overnight", "wallcp.npz")
 o = np.load(ov, allow_pickle=True)
 CP_o = o["CP"]; is_train = o["is_train"].astype(bool)
 print("overnight wallcp: CP %s  train=%d test=%d" % (CP_o.shape, is_train.sum(), (~is_train).sum()))

@@ -84,9 +84,9 @@ b_cp.onnx 与 b_field.onnx 都在）。
 ```
 一致性自检，8 条样本
 Traceback (most recent call last):
-  File "/home/zch/airfrans/04_results/demo/tools/export_onnx.py", line 229, in <module>
+  File "/home/user/airfrans/04_results/demo/tools/export_onnx.py", line 229, in <module>
     y_onnx = sess.run(["alpha"], {"x": X})[0]
-  File "/home/zch/.conda/envs/pytorch/lib/python3.10/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 220, in run
+  File "/home/user/.conda/envs/pytorch/lib/python3.10/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 220, in run
     return self._sess.run(output_names, input_feed, run_options)
 onnxruntime.capi.onnxruntime_pybind11_state.InvalidArgument: [ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Got invalid dimensions for input: x for the following indices
  index: 0 Got: 8 Expected: 1

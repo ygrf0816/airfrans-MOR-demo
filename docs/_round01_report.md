@@ -73,13 +73,13 @@
 
 ```
 Traceback (most recent call last):
-  File "/home/zch/airfrans/04_results/demo/tools/export_onnx.py", line 100, in <module>
+  File "/home/user/airfrans/04_results/demo/tools/export_onnx.py", line 100, in <module>
     assert CP_PATH and os.path.isfile(CP_PATH), "找不到压力曲线模型 checkpoint"
 AssertionError: 找不到压力曲线模型 checkpoint
 ```
 
 `export_check.json` 不存在（远端确认：
-`cat: /home/zch/airfrans/04_results/demo/data_remote/export_check.json: 没有那个文件或目录`）。
+`cat: /home/user/airfrans/04_results/demo/data_remote/export_check.json: 没有那个文件或目录`）。
 
 因为按任务要求"报错就报告、不改脚本"，export_onnx.py 没有改动，
 所以 b_cp.onnx、b_field.onnx、cp_basis_meta.json、export_check.json

@@ -36,13 +36,13 @@
 远端命令还是那一条，起后台后立刻返回。
 
 ```
-cd /home/zch/airfrans && nohup bash 04_results/demo/run_export.sh > 04_results/demo/run_export.out 2>&1 &
+cd /home/user/airfrans && nohup bash 04_results/demo/run_export.sh > 04_results/demo/run_export.out 2>&1 &
 ```
 
 起完之后**等一会**再查，不要连查。查询只做一次，一次问清：
 
 ```
-pgrep -af export_onnx ; pgrep -af trim_field_basis ; tail -n 50 /home/zch/airfrans/04_results/demo/run_export.out ; ls -l /home/zch/airfrans/04_results/demo/data_remote
+pgrep -af export_onnx ; pgrep -af trim_field_basis ; tail -n 50 /home/user/airfrans/04_results/demo/run_export.out ; ls -l /home/user/airfrans/04_results/demo/data_remote
 ```
 
 看到 `ALL_DONE` 就是跑完了。看到 `Traceback` 就把原文抄下来报告，**不要改脚本**。

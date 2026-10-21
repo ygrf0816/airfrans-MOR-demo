@@ -32,7 +32,7 @@
 - **训练产出的权重文件**（`.pth`）：体积大，仓库里提供的是已导出的 ONNX；
 - **参赛提交材料中的报告与论文**：见竞赛提交包。
 
-另外，脚本里有若干路径写死为作者的工作站环境（`/home/zch/airfrans` 等），
+另外，脚本里有若干路径写死为作者的工作站环境（`/home/user/airfrans` 等），
 复现前需要改成自己的路径；[`code/README.md`](code/README.md) 写明了运行方式，
 以及六个容易踩的口径陷阱（压力曲线是闭合回路、几何站序是后缘在前等）。
 
@@ -129,7 +129,7 @@ npm run build
 
 `tools/` 下的脚本用于从上游数据重新生成资产，需要 GPU 与完整数据集。
 训练与搜索的完整脚本在 [`code/`](code/README.md)，复现前先把脚本里的工作站路径
-（`/home/zch/airfrans` 等）改成自己的：
+（`/home/user/airfrans` 等）改成自己的：
 
 ```
 python tools/make_geom_fixture.py      # 几何核对基准

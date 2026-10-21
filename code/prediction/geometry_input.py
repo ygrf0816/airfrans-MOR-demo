@@ -53,7 +53,7 @@ def thickness_frac(naca, series):
 # 缓存缺失、站位不同、或名字不在缓存里 -> 自动回落到逐个读 .vtp，
 # 行为与没有缓存时**完全一致**（不改变任何数值口径）。
 _GEOM_CACHE_PATH = os.environ.get("AIRFRANS_GEOM_CACHE",
-                                  "/home/zch/airfrans/pod/geomvec_1000.npz")
+                                  "/home/user/airfrans/pod/geomvec_1000.npz")
 _geom_cache = None
 
 

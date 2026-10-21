@@ -76,11 +76,11 @@ def main():
     ap.add_argument("--tasks", default="full,scarce,reynolds,aoa")
     ap.add_argument("--smoke-only", action="store_true")
     ap.add_argument("--wallcp-npz", default=None,
-                    help="B 链路壁面 Cp 全量 npz（工作站 /home/zch/airfrans/pod/wallcp_1000.npz）")
+                    help="B 链路壁面 Cp 全量 npz（工作站 /home/user/airfrans/pod/wallcp_1000.npz）")
     ap.add_argument("--manifest", default=None,
-                    help="官方 4 任务 manifest.json（工作站 /home/zch/airfrans/data/manifest.json）")
+                    help="官方 4 任务 manifest.json（工作站 /home/user/airfrans/data/manifest.json）")
     ap.add_argument("--task-root", default=None,
-                    help="airfrans load 数据根（工作站 /home/zch/airfrans/data/Dataset）；"
+                    help="airfrans load 数据根（工作站 /home/user/airfrans/data/Dataset）；"
                          "B 链路几何生成器也读它")
     ap.add_argument("--smoke-limit", type=int, default=100)
     ap.add_argument("--smoke-epochs", type=int, default=3,

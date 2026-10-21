@@ -1,7 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-工作站（10.10.20.87 / zch）远程调用封装 —— 绕开 AGH shell 白名单环境导致的 ssh 255 问题。
+工作站远程调用封装 —— 绕开 AGH shell 白名单环境导致的 ssh 255 问题。
+
+连接参数一律从环境变量读取，仓库里不放具体主机、账号与密钥路径：
+    AIRFRANS_WS_HOST   远端主机地址
+    AIRFRANS_WS_USER   远端账号
+    AIRFRANS_WS_DIR    远端工作目录（默认 ~/airfrans）
+    AIRFRANS_SSH_DIR   本机 .ssh 目录（默认 ~/.ssh）
+    AIRFRANS_SSH_KEY   私钥文件名（默认 id_rsa）
 
 背景（2026-10-01 定位）
   Agnes Harness 的 shell 工具只传白名单环境变量（PATH/HOME/LANG/LC_ALL/TMPDIR/TEMP/TMP/
@@ -17,13 +24,12 @@
     full env - ProgramData       -> exit 255 （从完整环境里删掉它即复现故障）
 
 用法
-    python 03_code/station/remote.py "hostname; nproc"
-    python 03_code/station/remote.py --script 09_tmp/job.sh     # 上传并执行
-    python 03_code/station/remote.py --put local.txt /home/zch/airfrans/data/
+    python code/station/remote.py "hostname; nproc"
+    python code/station/remote.py --script job.sh                # 上传并在远端执行
+    python code/station/remote.py --put local.txt '~/airfrans/data/'
 
 远端工作区
-    /home/zch/airfrans          ← 当前项目（AirfRANS），所有操作在此进行
-    /home/zch/heat3d_hackathon  ← 旧 Heat3D 项目，已归档（见其 ARCHIVED.md），勿用
+    由 AIRFRANS_WS_DIR 指定；下面的重载参数默认都相对它展开。
 """
 from __future__ import annotations
 
@@ -32,14 +38,14 @@ import os
 import subprocess
 import sys
 
-HOST = "10.10.20.87"
-USER = "zch"
+HOST = os.environ.get("AIRFRANS_WS_HOST", "")
+USER = os.environ.get("AIRFRANS_WS_USER", "")
+SSH_DIR = os.environ.get("AIRFRANS_SSH_DIR") or os.path.join(os.path.expanduser("~"), ".ssh")
+KEY = os.path.join(SSH_DIR, os.environ.get("AIRFRANS_SSH_KEY", "id_rsa"))
+KNOWN_HOSTS = os.path.join(SSH_DIR, "known_hosts")
+REMOTE_TMP = os.environ.get("AIRFRANS_WS_DIR", "~/airfrans")
 SSH = r"C:\Windows\System32\OpenSSH\ssh.exe"
 SCP = r"C:\Windows\System32\OpenSSH\scp.exe"
-SSH_DIR = r"C:\Users\Administrator\.ssh"
-KEY = os.path.join(SSH_DIR, "id_rsa")
-KNOWN_HOSTS = os.path.join(SSH_DIR, "known_hosts")
-REMOTE_TMP = "/home/zch/airfrans"
 
 
 def _base_env() -> dict:
@@ -48,10 +54,18 @@ def _base_env() -> dict:
     if not env.get("ProgramData"):
         env["ProgramData"] = r"C:\ProgramData"
     if not env.get("HOME"):
-        env["HOME"] = SSH_DIR.rsplit("\\", 2)[0]
+        env["HOME"] = os.path.dirname(SSH_DIR)
     env.setdefault("SystemRoot", r"C:\Windows")
     env.setdefault("COMSPEC", r"C:\Windows\system32\cmd.exe")
     return env
+
+
+def _require_conn() -> None:
+    if not HOST or not USER:
+        raise SystemExit(
+            "请先设置环境变量 AIRFRANS_WS_HOST 与 AIRFRANS_WS_USER（可选 AIRFRANS_WS_DIR / "
+            "AIRFRANS_SSH_DIR / AIRFRANS_SSH_KEY），再运行本脚本。"
+        )
 
 
 def _ssh_opts() -> list:
@@ -65,6 +79,7 @@ def _ssh_opts() -> list:
 
 def run(command: str, capture: bool = True) -> subprocess.CompletedProcess:
     """在工作站上执行一条命令（command 会被远端 shell 解析）。"""
+    _require_conn()
     argv = [SSH, *_ssh_opts(), f"{USER}@{HOST}", command]
     return subprocess.run(
         argv, env=_base_env(), capture_output=capture, text=True,
@@ -73,6 +88,7 @@ def run(command: str, capture: bool = True) -> subprocess.CompletedProcess:
 
 
 def put(local: str, remote_dir: str = REMOTE_TMP) -> subprocess.CompletedProcess:
+    _require_conn()
     argv = [SCP, *_ssh_opts(), local, f"{USER}@{HOST}:{remote_dir}"]
     return subprocess.run(
         argv, env=_base_env(), capture_output=True, text=True,
@@ -81,6 +97,7 @@ def put(local: str, remote_dir: str = REMOTE_TMP) -> subprocess.CompletedProcess
 
 
 def get(remote: str, local_dir: str = ".") -> subprocess.CompletedProcess:
+    _require_conn()
     argv = [SCP, *_ssh_opts(), f"{USER}@{HOST}:{remote}", local_dir]
     return subprocess.run(
         argv, env=_base_env(), capture_output=True, text=True,
@@ -111,7 +128,7 @@ def main() -> int:
     elif args.put:
         r = put(args.put[0], args.put[1])
     elif getattr(args, 'get', None):
-        r = get(args.get[0], args.get[1] if len(args.get)>1 else '.')
+        r = get(args.get[0], args.get[1] if len(args.get) > 1 else '.')
     elif args.command:
         r = run(args.command)
     else:

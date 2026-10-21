@@ -17,7 +17,7 @@
   rank-32 截断后回读              5.367
 对照：同一批节点上纯笛卡尔表示的下限约 27.8（6 测试样本）-> 贴体把表示误差降约 5 倍。
 
-产物：/home/zch/airfrans/pod/vol_fields_bodyfit_1000.npz
+产物：/home/user/airfrans/pod/vol_fields_bodyfit_1000.npz
   names (1000,)            顺序 = manifest full_train + full_test（与 vol_fields_1000 一致）
   ns, nd, d0, d1           贴体带定义（本文件里的 u/v/p/nu_t **就是** (s,d) 带上的值，
                            与 vol_fields_1000.npz 里同名的笛卡尔网格场是两个文件、互不冲突）
@@ -32,8 +32,8 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _HERE)
 from bodyfit import order_surface      # noqa: E402  表面排序与朝向统一的唯一实现
 
-DATA = "/home/zch/airfrans/data/Dataset"
-OUT = "/home/zch/airfrans/pod/vol_fields_bodyfit_1000.npz"
+DATA = "/home/user/airfrans/data/Dataset"
+OUT = "/home/user/airfrans/pod/vol_fields_bodyfit_1000.npz"
 NS, ND = 512, 64
 D0, D1 = 1e-5, 0.06
 FIELDS = ["u", "v", "p", "nu_t"]

@@ -20,7 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, '..', '..'))
 OUT = os.path.join(ROOT, '04_results', 'analysis')
 FIGS = os.path.join(OUT, 'figures')
-OV = r'C:\Users\Administrator\AppData\Local\Temp\agh-bridge\overnight'
+OV = os.path.join(os.environ.get("TEMP", "."), "agh-bridge", "overnight")
 
 def pod_svd(X):
     """X (n,m) 行=样本。返回 U,S,Vt 及 (n_train,) 的 train/test 划分。"""

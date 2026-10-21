@@ -35,7 +35,7 @@ os.makedirs(FIGDIR, exist_ok=True)
 
 # 中文字体：工作站无中文字体时会画成方框，这里只用英文标签
 plt_zh = False
-WALLCP_NPZ = "/home/zch/airfrans/pod/wallcp_1000.npz"
+WALLCP_NPZ = "/home/user/airfrans/pod/wallcp_1000.npz"
 TASKS = ["full", "scarce", "reynolds", "aoa"]
 N_SAMP = 6
 SEED = 20261004

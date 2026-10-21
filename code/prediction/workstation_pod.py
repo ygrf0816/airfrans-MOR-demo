@@ -1,16 +1,16 @@
 """工作站上做的事：解压 9GB zip + 3 口径 POD 全量重算（B 链路目标坐标）。
-运行在 zch@10.10.20.87，依赖 /home/zch/.conda/envs/pytorch + pyvista 0.49。
+运行在 user@<host>，依赖 /home/user/.conda/envs/pytorch + pyvista 0.49。
 
 口径严格对齐 P2-02 / P3-01 已验证结论（不另起炉灶）：
 - 壁面 Cp：p2_grid_wall.wall_cp（弧长归一化 s∈[0,1]，Cp=p_wall/q，q=0.5U∞²，
   前缘锚定由 cycle_from_edges 重建闭环 + s 前缘=0）
 - 体积 p / |U|：P2-01 256×128 公共网格插值 + 壁面掩膜（implicit_distance>0 剔除）
 
-输出 3 个 npz 到 /home/zch/airfrans/pod/：
+输出 3 个 npz 到 /home/user/airfrans/pod/：
   wallcp_1000.npz / vol_p_300x100.npz / vol_u_300x100.npz
   每个含：基 Vt[:r]、S、mu、split_idx（官方 full 800/200 或 300/100 子集）
 
-上传前需确保工作站 /home/zch/airfrans/prediction/ 下有：
+上传前需确保工作站 /home/user/airfrans/prediction/ 下有：
   vtkxml2.py / wall_force.py（P2-02 依赖，remote.py 已传）
 本脚本 main 流程：unzip -> 读 manifest -> 3 口径 POD -> 各存 npz。
 """
@@ -20,7 +20,7 @@ import pyvista as pv
 import warnings
 warnings.filterwarnings("ignore")
 
-ROOT = "/home/zch/airfrans"
+ROOT = "/home/user/airfrans"
 DATA = os.path.join(ROOT, "data")
 DS_ZIP = os.path.join(DATA, "Dataset.zip")
 DS_DIR = os.path.join(DATA, "Dataset")
@@ -239,7 +239,7 @@ def main():
             % (out_nm, (time.time() - t0) / 60, col_valid.mean(),
                np.round(S[:16], 3)))
 
-    log("ALL POD DONE. /home/zch/airfrans/pod/:")
+    log("ALL POD DONE. /home/user/airfrans/pod/:")
     for f in sorted(os.listdir(POD_OUT)):
         log("  %s  %.2f MB" % (f,
                                os.path.getsize(os.path.join(POD_OUT, f)) / 1e6))

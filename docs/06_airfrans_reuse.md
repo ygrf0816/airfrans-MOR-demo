@@ -21,12 +21,12 @@
 
 **一种是直接 import 官方发布的 `airfrans` Python 包。**
 工作站上的安装位置为
-`/home/zch/.conda/envs/pytorch/lib/python3.10/site-packages/airfrans/`，
+`/home/user/.conda/envs/pytorch/lib/python3.10/site-packages/airfrans/`，
 该包包含 `naca_generator`、`dataset`、`sampling`、`simulation` 等模块。
 
 **另一种是把官方仓库里的一个文件原样复制到项目里使用。**
 官方仓库 `AirfRANS-main/naca_generator.py` 被复制了一份到工作站的项目根目录
-`/home/zch/airfrans/naca_generator.py`，几何生成走的是这一份。
+`/home/user/airfrans/naca_generator.py`，几何生成走的是这一份。
 两份文件的 MD5 完全相同（`e2b2d0f4531e08dd2ef5c249ef394e4e`），即逐字节一致，未作修改。
 这里如实写明是复制而不是仅 import 包，以免核查时对不上。
 
@@ -41,7 +41,7 @@
 | 项 | 内容 |
 |---|---|
 | 官方文件 | 官方仓库 `AirfRANS-main/naca_generator.py` |
-| 调用方式 | 该文件被原样复制到 `/home/zch/airfrans/naca_generator.py`，`02_code/inversion/ga_design.py` 第 51 行 `import naca_generator as NG` 用的是这一份；两份文件 MD5 相同，未作修改 |
+| 调用方式 | 该文件被原样复制到 `/home/user/airfrans/naca_generator.py`，`02_code/inversion/ga_design.py` 第 51 行 `import naca_generator as NG` 用的是这一份；两份文件 MD5 相同，未作修改 |
 | 用途 | 把四个设计参数（弯度系数 L、弯度位置 P、弯型 Q、厚度系数 T）转成真实的翼型轮廓坐标。这是全项目几何环节的基准，反向设计搜出来的解都要经过它才能得到可画、可算的轮廓 |
 | 是否改动 | 未改动，逐字节一致 |
 

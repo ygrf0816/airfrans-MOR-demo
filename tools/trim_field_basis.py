@@ -3,9 +3,9 @@
 """裁剪流场 POD 基，导出网页用的网格与样本坐标。
 
 在工作站上跑（基文件 401 MB，本地没有）：
-  /home/zch/.conda/envs/pytorch/bin/python trim_field_basis.py \
-      --root /home/zch/airfrans \
-      --out  /home/zch/airfrans/04_results/demo/data_remote
+  /home/user/.conda/envs/pytorch/bin/python trim_field_basis.py \
+      --root /home/user/airfrans \
+      --out  /home/user/airfrans/04_results/demo/data_remote
 
 产物：
   field_basis.bin            float32，前 4*31066*32 是基，后 4*31066 是均值
@@ -29,7 +29,7 @@ FIELDS = ["u", "v", "p", "nu_t"]
 CHECK_NAME = "airFoil2D_SST_61.642_14.277_1.498_5.176_0.0_16.386"
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--root", default="/home/zch/airfrans")
+ap.add_argument("--root", default="/home/user/airfrans")
 ap.add_argument("--pred", default=None)
 ap.add_argument("--basis", default=None)
 ap.add_argument("--vol", default=None)

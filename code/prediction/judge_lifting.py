@@ -11,7 +11,7 @@
           读这个文件决定最终报哪套力系数字）。
 
   前置：wallcp_1000.npz 必须已是前缘锚定版（修复 2），否则线积分里 Cp 位置错。
-  数据：02_dataset/Dataset/（本机）或 工作站 /home/zch/airfrans/data/Dataset/。
+  数据：02_dataset/Dataset/（本机）或 工作站 /home/user/airfrans/data/Dataset/。
 """
 import os, sys, json, time
 import numpy as np

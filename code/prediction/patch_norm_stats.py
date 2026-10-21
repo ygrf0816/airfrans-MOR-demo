@@ -25,7 +25,7 @@ from train_B_transformer import load_pod_basis, POD_R, WALLCP_NPZ_DEFAULT  # noq
 import train_A_gnn as A  # noqa: E402
 import train_B_transformer as B  # noqa: E402
 
-ROOT = "/home/zch/airfrans"
+ROOT = "/home/user/airfrans"
 TASK_ROOT = os.path.join(ROOT, "data", "Dataset")
 TASKS = ["full", "scarce", "reynolds", "aoa"]
 BACKUP = os.path.join(ROOT, "prediction", "04_results", "prediction", "_weights_backup_before_stats")

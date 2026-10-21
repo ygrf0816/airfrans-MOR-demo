@@ -12,7 +12,7 @@
   只有 p 与 |U| 两个量、只有 400 样本，覆盖不了官方四任务划分
   （scarce 200/200、reynolds 504/496、aoa 804/196），无法做"每任务全字段对标"。
 
-产物：/home/zch/airfrans/pod/vol_fields_1000.npz
+产物：/home/user/airfrans/pod/vol_fields_1000.npz
   names (1000,)  样本名，顺序 = manifest 的 full_train + full_test
   mask  (32768,) bool  交集掩膜，True 表示该格参与
   u/v/p/nu_t  (1000, mask.sum()) float32  物理量原值（未标准化）
@@ -21,8 +21,8 @@
 import os, json, time, sys
 import numpy as np
 
-DATA = "/home/zch/airfrans/data/Dataset"
-OUT = "/home/zch/airfrans/pod/vol_fields_1000.npz"
+DATA = "/home/user/airfrans/data/Dataset"
+OUT = "/home/user/airfrans/pod/vol_fields_1000.npz"
 NX, NY = 256, 128
 # 必须用**全域** bbox：A 链路的 MSE 是在全部 ~18 万 CFD 网格节点上算的，
 # 而 P2-01 那套 (-0.5,4.23)x(-0.5,1.62) 是近场裁剪，上游远场完全没覆盖，

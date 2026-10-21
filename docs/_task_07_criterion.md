@@ -26,14 +26,14 @@
 远端执行：
 
 ```
-cd /home/zch/airfrans && nohup bash 04_results/demo/run_export_check.sh > 04_results/demo/run_export_check.out 2>&1 &
+cd /home/user/airfrans && nohup bash 04_results/demo/run_export_check.sh > 04_results/demo/run_export_check.out 2>&1 &
 ```
 
 这个脚本只跑自检与场基核对，不重新导出 ONNX，也不重新收集权重。
 两件事加起来几分钟。等一会再查一次：
 
 ```
-tail -n 60 /home/zch/airfrans/04_results/demo/run_export_check.out ; ls -l /home/zch/airfrans/04_results/demo/data_remote
+tail -n 60 /home/user/airfrans/04_results/demo/run_export_check.out ; ls -l /home/user/airfrans/04_results/demo/data_remote
 ```
 
 看到 `ALL_DONE` 就是完成了。

@@ -30,13 +30,13 @@
 远端执行下面这一条，命令会立刻返回。
 
 ```
-cd /home/zch/airfrans && nohup bash 04_results/demo/run_export_check.sh > 04_results/demo/run_export_check.out 2>&1 &
+cd /home/user/airfrans && nohup bash 04_results/demo/run_export_check.sh > 04_results/demo/run_export_check.out 2>&1 &
 ```
 
 ### 第 3 步 等一会再查，只查一次
 
 ```
-tail -n 60 /home/zch/airfrans/04_results/demo/run_export_check.out ; ls -l /home/zch/airfrans/04_results/demo/data_remote ; ls -l /home/zch/airfrans/04_results/demo/data_remote/weights
+tail -n 60 /home/user/airfrans/04_results/demo/run_export_check.out ; ls -l /home/user/airfrans/04_results/demo/data_remote ; ls -l /home/user/airfrans/04_results/demo/data_remote/weights
 ```
 
 看到 `ALL_DONE` 就是完成了。看到 `Traceback` 就抄报错原文报告，**不要改脚本**。

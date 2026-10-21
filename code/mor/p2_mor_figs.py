@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
-OV = r'C:\Users\Administrator\AppData\Local\Temp\agh-bridge\overnight'
+OV = os.path.join(os.environ.get("TEMP", "."), "agh-bridge", "overnight")
 OUT = os.path.join(ROOT, '04_results', 'analysis')
 FIGS = os.path.join(OUT, 'figures')
 os.makedirs(FIGS, exist_ok=True)
