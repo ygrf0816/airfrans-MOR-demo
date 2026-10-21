@@ -1,0 +1,19 @@
+{
+ "patched": [
+  "p1_field_aggregate.py",
+  "p1_field_redraw_full.py",
+  "p1_field_sample.py",
+  "p1_inventory.py",
+  "p1_mach_domain.py",
+  "p1_mesh_sample.py",
+  "p1_params.py",
+  "p1_physics_aggregate.py",
+  "p1_physics_full.py",
+  "p1_physics_plot.py",
+  "p1_physics_sample.py",
+  "p1_splits.py",
+  "p2_mor_figs.py",
+  "p2_mor_post.py",
+  "write_p1_02.py"
+ ]
+}

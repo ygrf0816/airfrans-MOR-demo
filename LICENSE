@@ -22,7 +22,7 @@ SOFTWARE.
 
 ---
 
-本许可证只覆盖代码（`source/`、`tools/`、`serve.py`）。
+本许可证覆盖代码（`code/`、`source/`、`tools/`、`serve.py`）。
 
 `site/data/` 与 `site/assets/` 下的数据资产是 AirfRANS 数据集的衍生作品，
 沿用上游的 ODC Open Database License (ODbL) v1.0，不适用上面的 MIT 条款。
