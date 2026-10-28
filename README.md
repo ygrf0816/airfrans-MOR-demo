@@ -1,177 +1,299 @@
-# 数据驱动的翼型气动代理与反向设计
+# Data-Driven Airfoil Aerodynamic Surrogate and Inverse Design
 
-> 2026 年江苏省「人工智能 + 科学」大赛 · 硕博组 · 参赛编号 G012 · 队伍 PCDLab
->
-> **在线体验：<https://ygrf0816.github.io/airfrans-MOR-demo/>**
+English | [简体中文](README.zh-CN.md)
 
-## 这个仓库是做什么的
+<div align="center">
 
-这是参赛作品《数据驱动的翼型气动代理与反向设计》的公开仓库，包含两部分内容：
+### Compress 1000 CFD solutions into 17 MB. Predict pressure and flow in milliseconds, in the browser.
 
-- **在线演示**：把已经训练好、已经导出好的模型与数据资产，以纯静态网页的形式放到公网上，
-  让评审和读者**打开链接就能动手操作**，不用装环境、不用下载数据集、不用显卡。
-- **核心代码**：数据降维、代理模型训练与导出、可解释性分析、多目标反向设计搜索的
-  全部自研脚本，共 133 个文件，见 [`code/`](code/README.md)。
+**2026 Jiangsu Province "AI + Science" Competition · Graduate Division · Entry G012 · Team PCDLab**
 
-模型推理全部在访问者的浏览器里，由 ONNX Runtime 的 WebAssembly 后端完成，
-没有后端服务，不联网取数，站点是纯静态的。
+<img src="https://img.shields.io/badge/status-submission%20build-2ea44f" alt="Status: submission build" />
+<img src="https://img.shields.io/badge/license-MIT-2F4F4F" alt="License: MIT" />
+<img src="https://img.shields.io/badge/demo-online%20%C2%B7%20no%20install-3b8fff" alt="Demo: online, no install" />
+<img src="https://img.shields.io/badge/inference-WASM%20in%20browser-6f42c1" alt="Inference: WASM in browser" />
 
-| 目录 | 内容 |
-|---|---|
-| `code/` | **核心代码**：`prediction/`（代理模型训练与评估）、`inversion/`（多目标反向设计、压力曲线反演）、`explain/`（可解释性分析）、`mor/`（数据集体检与降维）、`data_check/`（单样本解析）、`station/`（远端工作站驱动） |
-| `source/` | 演示前端，Vite + React 19 + TypeScript + Three.js + ECharts |
-| `site/` | 已构建的站点与已导出的资产（两个 ONNX 代理模型、模态基、样本与案例数据） |
-| `tools/` | 资产导出、核对与打包脚本 |
-| `docs/` | 作品计划、数据契约、界面设计说明、开发过程记录，以及官方代码复用清单（[`docs/06_airfrans_reuse.md`](docs/06_airfrans_reuse.md)） |
+[Live demo](https://ygrf0816.github.io/airfrans-MOR-demo/) · [Demo video](https://www.bilibili.com/video/BV1YSpu6gEbm/) · [Architecture](#architecture) · [Integration standards](#integration-standards) · [Source code](code/)
 
-### 复现范围
+</div>
 
-`code/` 里是训练与搜索的完整脚本，但本仓库**不包含**下面这些：
+> An interactive demo of a reduced-order aerodynamic surrogate: 1000 two-dimensional airfoil RANS solutions are compressed into a few POD coordinates, a ~0.3 M-parameter network predicts those coordinates in milliseconds, and the same representation drives explainability analysis and constrained inverse design. All inference runs on the visitor's machine — no backend, no GPU, no dataset download.
 
-- **上游数据集**：14.3 GB 的 AirfRANS 原始 CFD 解，按 [`DATA_LICENSE.md`](DATA_LICENSE.md) 里的地址自行下载；
-- **训练产出的权重文件**（`.pth`）：体积大，仓库里提供的是已导出的 ONNX；
-- **参赛提交材料中的报告与论文**：见竞赛提交包。
+<details>
+<summary><kbd>Contents</kbd></summary>
 
-另外，脚本里有若干路径写死为作者的工作站环境（`/home/user/airfrans` 等），
-复现前需要改成自己的路径；[`code/README.md`](code/README.md) 写明了运行方式，
-以及六个容易踩的口径陷阱（压力曲线是闭合回路、几何站序是后缘在前等）。
+- [Project overview](#project-overview)
+  - [Background](#background)
+  - [What it does](#what-it-does)
+  - [Highlights](#highlights)
+- [Demo video](#demo-video)
+- [Architecture](#architecture)
+  - [Data pipeline](#data-pipeline)
+  - [Runtime and modules](#runtime-and-modules)
+  - [Application layer](#application-layer)
+- [Integration standards](#integration-standards)
+  - [Asset contract](#asset-contract)
+  - [ONNX interface](#onnx-interface)
+  - [Geometry and field conventions](#geometry-and-field-conventions)
+  - [Hosting requirements](#hosting-requirements)
+  - [Optional LLM endpoint](#optional-llm-endpoint)
+  - [Conformance checks](#conformance-checks)
+- [Quick start](#quick-start)
+- [Repository layout](#repository-layout)
+- [License and citation](#license-and-citation)
 
-## 作品在做什么
+</details>
 
-一句话：把一千条二维翼型 RANS 数值解先降维成十几个模态坐标，再用二十万参数量级的小模型
-在浏览器里毫秒级复现压力分布与流场，并在此基础上做带约束的反向设计。
+---
 
-这里的 AirfRANS 数据集只是**数据来源**（1000 条二维翼型 RANS 解），
-本作品要解决的问题是**"降维 + 代理 + 反向设计"这条链路本身**：
+## Project overview
 
-- 一条 CFD 算例要几分钟到几小时，设计空间里动辄要评估几千个方案，算力根本不够；
-- 所以先用降维把物理场压成极少数坐标，再用小模型直接预测这些坐标，
-  把单次评估从"几分钟"压到"毫秒"；
-- 有了这个速度，才能在上面做带约束的多目标反向设计搜索。
+### Background
 
-## 五个页面
+The cross-section of a fan blade, a wind-turbine blade or an aircraft wing is an *airfoil*. Its shape decides how much lift it produces at a given inflow speed and angle of attack. The traditional loop is *change the shape → run CFD → read the numbers → change it again*, and one two-dimensional RANS case costs minutes to hours. A design study needs thousands of evaluations, so compute — not ideas — is the bottleneck.
 
-| 页面 | 做什么 |
-|---|---|
-| 降维演示 | 一千条数据怎么用十几个数字概括；样本索引、秩截断与投影；可上传自己的曲线试投影 |
-| 前向预测 | 改几何与来流参数，压力曲线与流场云图即时更新 |
-| 可解释性分析 | 几何四分量对流场的影响：全局排序、逐弦向站位局部影响、两条腿一致性、交互作用 |
-| 反向设计与对话 | 自然语言转设计目标，给出候选解；可接在线大模型，也可用本地规则模式 |
-| 成果总览 | 前沿解、三个种子的收敛、数据集体检 |
+The dataset used here is [AirfRANS](https://github.com/Extrality/AirfRANS): 1000 high-fidelity two-dimensional airfoil RANS solutions (SST turbulence model), split into 489 four-digit and 511 five-digit NACA geometries, 14.3 GB on disk. The dataset is only the *source of data*. The problem this project attacks is the **"reduction → surrogate → inverse design" chain itself**.
 
-设置面板里可以现场填写在线大模型的接口地址、模型名与密钥。
-密钥只存在当次页面的内存中，不落盘、不进仓库。不填也能完整演示，会自动切到本地规则模式。
+### What it does
 
-口径、资产清单与字段定义见 [`docs/01_DATA_CONTRACT.md`](docs/01_DATA_CONTRACT.md)，
-界面设计与交互说明见 [`docs/02_UI_DESIGN.md`](docs/02_UI_DESIGN.md)。
+1. **Reduce.** Every solution is projected onto a POD basis: a pressure curve needs 5 modes for 99% energy, a volume field 3 (pressure) to 8 (velocity). The full dataset shrinks from **14.3 GB to 16.98 MB** — about **885:1**.
+2. **Surrogate.** A four-layer MLP takes 133 inputs (5 inflow scalars + a 128-dim geometry curve) and predicts POD coordinates: 8 for the pressure curve, 4 × 32 = 128 for the four volume fields. About **0.3 M parameters**, exported to ONNX.
+3. **Serve.** A static site runs those ONNX models through **ONNX Runtime Web (WebAssembly)** inside the visitor's browser. Five pages: reduction, forward prediction, explainability, inverse design, results.
+4. **Invert.** The same fast surrogate is used backwards: a constrained multi-objective search for a better airfoil, and a study of how far a pressure distribution can be inverted into a shape.
 
-## 本地运行
+### Highlights
 
-**不要直接双击 `site/index.html`。** 浏览器的本地文件协议会拦掉模型文件与数据文件的
-读取，页面会是一片空白。用本目录随附的服务器脚本打开：
-
-```
-python serve.py
-```
-
-然后浏览器访问 `http://127.0.0.1:8080/`。端口可以改：`python serve.py 9000`。
-
-### 为什么不能用 `python -m http.server`
-
-Python 3.9 之前的标准库里没有 `application/wasm` 这条 MIME 记录，
-`.wasm` 会被发成 `application/octet-stream`。ONNX Runtime Web 在这种情况下
-**不会**退回用 ArrayBuffer 加载，而是直接失败。实测表现是：
-
-- 页面顶部仍显示「真实数据」，说明 JSON 资产加载正常；
-- 但四个指标卡全部显示「待接入」，压力曲线与流场云图全空；
-- 模型状态写「未启用」，而且不给失败原因。
-
-`serve.py` 只用标准库，把这几条 MIME 写死，因此不依赖 Python 的 MIME 表。
-实测环境是 Python 3.12；脚本按 Python 3.6 以上的语法编写。
-线上（GitHub Pages）不存在这个问题，它自己就会把 `.wasm` 发成 `application/wasm`。
-
-### 环境要求
-
-| 项 | 要求 | 不满足会怎样 |
+| # | Contribution | Evidence |
 |---|---|---|
-| Python | 3.6 及以上，只用来起服务器 | 起不了服务器 |
-| 静态服务器 | 随附的 `serve.py`，或任何会正确发送 `application/wasm` 的服务器 | 模型全部加载失败 |
-| 浏览器 | 支持 WebAssembly SIMD：Chrome 91+ / Edge 91+ / Firefox 89+ / Safari 16.4+ | 模型全部加载失败 |
+| 1 | **Reduction instead of point-wise regression.** Predicting a handful of POD coordinates beats regressing every mesh point, at a fraction of the size. | On the aligned protocol, the body-fitted volume-field error is **0.20–0.23×** the official single-pass GNN error (~5× better); model ≈ 0.3 M parameters, runs in a browser tab. |
+| 2 | **Four chains, one representation.** Forward prediction, explainability, inverse design and pressure inversion all operate on the same POD coordinates instead of four unrelated models. | `code/prediction`, `code/explain`, `code/inversion` share one basis; the demo uses the same numbers. |
+| 3 | **Constrained multi-objective inverse design.** Maximise lift at the design point while minimising loss across the operating angle band, under local-Mach and separation constraints. | Lift coefficient **1.347–1.351** at 8° vs **1.146** for the best real airfoil in the same database; **101 Pareto solutions** beat it; three seeds agree within 0.3%. |
+| 4 | **Quantified non-uniqueness of the inverse problem.** A pressure curve can be fitted below the model's own error floor while the recovered shape is visibly different. | "Pressure fits well" does **not** mean "the shape was recovered" — true camber normal, recovered camber reflex. A reusable caution for any pressure-to-shape inversion. |
+| 5 | **Zero-install demonstration.** The whole site is static; all inference is client-side. | ~58 MB site, no backend, no GPU, no dataset download. |
 
-不需要联网，不需要显卡，不需要 Node.js，不需要装任何 Python 包。
+Accuracy summary on the four official splits (per-sample relative L2 error, 5 repeated runs): pressure curve **0.23–0.44** (0.311 on `full`), against a mean-field baseline 0.93–1.12, a ridge-regression baseline 0.57–0.86, and a POD truncation floor of 0.048.
 
-## 仓库结构
+---
 
-| 路径 | 内容 |
+## Demo video
+
+| Content | Link |
 |---|---|
-| `code/` | **核心代码**：代理模型训练、反向设计搜索、可解释性分析、降维与体检（见 [`code/README.md`](code/README.md)） |
-| `serve.py` | 随附的静态服务器，把 `.wasm` 的 MIME 写死，不挑 Python 版本 |
-| `site/` | 构建好的静态站点，GitHub Pages 发布的就是这个目录 |
-| `source/` | 演示前端源码 |
-| `tools/` | 资产导出与打包核对脚本（导出环节需要上游数据与 GPU，不随仓库提供数据） |
-| `docs/` | 作品计划、数据契约、界面设计说明，以及开发过程的任务单与轮次记录（见 [`docs/README.md`](docs/README.md)） |
-| `LICENSE` | 代码的 MIT 许可 |
-| `DATA_LICENSE.md` | 数据与模型资产的 ODbL 许可与引用要求 |
+| **Demo video (Bilibili)** | <https://www.bilibili.com/video/BV1YSpu6gEbm/> |
+| Backup copy (Quark Drive, code `TUsy`) | <https://pan.quark.cn/s/53ef366cdbf7> |
+| Live interactive demo | <https://ygrf0816.github.io/airfrans-MOR-demo/> |
 
-`source/` 里不含 `public/data/`，站点用的资产就是 `site/data/`。
-原始数据集（14.3 GB 的 AirfRANS 原始 CFD 解）**不在仓库里**，需要时按
-[`DATA_LICENSE.md`](DATA_LICENSE.md) 里的地址自行下载。
+The video is the submission material for this entry: it walks the problem, the three-step method (reduce → surrogate → invert) and then drives the live site page by page — reduction, forward prediction, explainability, inverse design, results. If the Bilibili link is unavailable in your region, use the backup copy; if you only want to try it yourself, open the live demo directly (desktop Chrome or Edge recommended).
 
-## 重新构建站点
+---
+
+## Architecture
+
+The system has an offline half that produces assets and an online half that consumes them. They meet at a single contract: the files in `site/data/`.
 
 ```
+                 OFFLINE (GPU workstation)                        ONLINE (visitor's browser)
+ ┌──────────────────────────────────────────────┐   ┌───────────────────────────────────────────┐
+ │ AirfRANS raw solutions   1000 × ~180k nodes  │   │  static site (GitHub Pages)               │
+ │            │                                 │   │    ├─ HTML / JS / CSS  (Vite build)       │
+ │            ▼                                 │   │    ├─ ONNX Runtime Web  (WASM, 1 thread)  │
+ │  wall Cp (256-pt closed loop)                │   │    └─ data assets  ◄──────────────────┐    │
+ │  volume fields on 256×128 grid               │   │            │                         │    │
+ │            │                                 │   │            ▼                         │    │
+ │            ▼                                 │   │  z-score inputs (stats from basis)   │    │
+ │  POD basis  (Cp: 5 modes, fields: 3–8)       │   │            │                         │    │
+ │            │                                 │   │            ▼                         │    │
+ │            ▼                                 │   │  ONNX: 133 → 8 / 133 → 128           │    │
+ │  MLP 133 → 8 / 128    ~0.3 M params          │   │            │                         │    │
+ │            │                                 │   │            ▼                         │    │
+ │            ▼                                 │   │  POD coords → physics                │    │
+ │  train · evaluate · export ONNX              │   │            │                         │    │
+ │            │                                 │   │            ▼                         │    │
+ │            ▼                                 │   │  ECharts curves · canvas field maps   │    │
+ │  asset export  ──────────────────────────────┼───┼─► site/data/  (ONNX, .bin, .json)     │    │
+ └──────────────────────────────────────────────┘   └───────────────────────────────────────────┘
+```
+
+### Data pipeline
+
+| Stage | What happens | Where |
+|---|---|---|
+| 1. Reduce | Per-sample wall pressure is sampled on a closed 256-point arc-length loop (anchored at the leading edge); volume fields are interpolated onto a common 256 × 128 Cartesian grid with an airfoil-interior mask (31 066 valid cells). POD bases are computed per quantity. | `code/mor/`, `code/prediction/workstation_pod.py` |
+| 2. Train | A four-layer MLP (width 256) predicts POD coordinates from 133 z-scored inputs. Four official splits (`full`, `scarce`, `reynolds`, `aoa`) are trained and evaluated; baselines and the POD truncation floor are reported alongside. | `code/prediction/` |
+| 3. Export | Models are exported to ONNX (opset 17) and verified against PyTorch element-wise with a combined tolerance; bases, statistics, sample indices and case fields are packed into the asset set. | `tools/export_onnx.py`, `tools/make_web_data.py` |
+| 4. Serve | Vite builds the frontend; the build output plus `site/data/` is published as a static site. | `source/`, `.github/workflows/pages.yml` |
+
+### Runtime and modules
+
+| Module | Responsibility | Key files |
+|---|---|---|
+| `code/prediction` | Training, evaluation, official-protocol comparison, ONNX export support | `train_B_field.py`, `train_B_transformer.py`, `official_metrics.py`, `geometry_input.py` |
+| `code/mor` | Dataset audit, parameter decoding, POD reduction and reconstruction checks | `p2_pod_wallcp.py`, `p3_volume_pod.py`, `wall_force.py` |
+| `code/explain` | Explainability data and figures (four geometry components, global vs local sensitivity) | `plot_report_figs.py`, `plot_field_local.py` |
+| `code/inversion` | Reachability, multi-objective search, weight verification, pressure inversion | `ga_design.py`, `verify_weight_local.py`, `field_cases.py` |
+| `code/station` | Thin wrapper for running jobs on the remote workstation | `remote.py` |
+| `tools` | Asset export, consistency verification, packaging | `make_web_data.py`, `export_onnx.py`, `verify_demo_assets.py` |
+| `source` | Frontend (React 19 + TypeScript, ECharts / canvas) | `src/lib/models.ts`, `src/lib/fieldmodel.ts`, `src/pages/*` |
+| `site` | Built site and exported assets — the deployed artifact | `site/data/*` |
+
+### Application layer
+
+| Page | Purpose |
+|---|---|
+| Reduction | How 1000 solutions collapse into a dozen numbers; rank truncation, projection, upload your own curve |
+| Forward prediction | Change geometry and inflow, watch the pressure curve and flow field update |
+| Explainability | Which geometry component matters, how much, and over which chord range |
+| Inverse design | Natural-language goal → candidate shapes, with constraint pass/fail; optional online LLM, local rule mode by default |
+| Results | Pareto front, three-seed convergence, dataset health |
+
+---
+
+## Integration standards
+
+Everything below is the contract between the offline exporter, the frontend and any third-party consumer. If you replace the models, keep the formats.
+
+### Asset contract
+
+All assets live under `site/data/` and are served as plain files. **Every binary is little-endian float32** and is meant to be mapped directly with `Float32Array` — never re-encoded as JSON number arrays (3× larger, slower to parse).
+
+| File | Type | Shape / size | Required |
+|---|---|---|---|
+| `manifest.json` | JSON | asset index (`entries[]` with `name`, `kind`, `bytes`, `required`) | yes |
+| `b_cp.onnx` | ONNX | pressure-curve surrogate | yes |
+| `b_field.onnx` | ONNX | volume-field surrogate | yes |
+| `cp_basis.json` | JSON | POD basis + z-score statistics for the pressure model | yes |
+| `field_basis.bin` / `field_basis.json` | float32 / JSON | POD basis of the four volume fields, and its metadata | yes |
+| `grid.json` | JSON | 256 × 128 grid extent and airfoil mask | yes |
+| `samples.json` | JSON | 1000-sample index (name, inflow, AoA, family, lift) | yes |
+| `samples_cp.bin` | float32 | `[1000, 256]` wall pressure curves | yes |
+| `samples_geom.bin` | float32 | `[1000, 128]` geometry curves | yes |
+| `samples_alpha.bin` | float32 | `[1000, 136]` = 8 pressure coords + 128 field coords | yes |
+| `cases_field.bin` / `cases_field.json` | float32 / JSON | four fields of seven worked cases, sliced by `blocks` | yes |
+| `results.json` | JSON | Pareto fronts, seed histories, dataset health, official benchmark table | yes |
+| `figs/*` | webp / svg / jpg | gallery figures and `figs/index.json` captions | yes |
+
+`kind` in `manifest.json` is limited to `model`, `basis`, `grid`, `samples`, `cases`, `results`, `image`.
+
+### ONNX interface
+
+| Model | Input | Output | Meaning of output |
+|---|---|---|---|
+| `b_cp.onnx` | `x` float32 `[1, 133]` | `alpha` float32 `[1, 8]` | POD coordinates of the pressure curve |
+| `b_field.onnx` | `x` float32 `[1, 133]` | `alpha` float32 `[1, 128]` | 4 fields × 32 POD coordinates |
+
+Input layout: the first 5 values are z-scored inflow scalars, the remaining 128 are the z-scored geometry curve. **Z-score statistics must be taken from `cp_basis.json` (pressure model) or `field_basis.json` (field model)** — they are not interchangeable.
+
+Reconstruction, done in JavaScript (negligible cost):
+
+```
+cp[i]   = Σ_k alpha[k] · phi[i][k] + mu[i]                 # k = 0..7
+field_k = Σ_j alpha[32k + j] · phi[k][j] + mu[k]           # k = 0..3 (u, v, p, nu_t)
+```
+
+The 31 066 valid field values are then written into the 128 × 256 mask in row-major order.
+
+### Geometry and field conventions
+
+These are the traps that silently corrupt results; they are listed here because any integrator will hit them.
+
+| Item | Convention |
+|---|---|
+| Pressure curve | **Closed loop along the airfoil contour**, normalised arc length `s ∈ [0, 1]`, 256 points. `s = 0` and `s = 1` are both the leading edge, `s ≈ 0.5` is the trailing edge. Treating `s` as a chordwise axis produces wrong conclusions. |
+| Geometry vector (128) | Cosine-spaced chordwise stations. Indices `0–63` are the **upper** surface `y/c`, `64–127` the lower surface. **Index 0 is the trailing edge**, index 63 the leading edge — reversed with respect to intuition. |
+| Inflow scalars (5) | `[U∞, AoA, 0.15·L, T/100, round(Q)]` — camber enters as `0.15·L`, not `L`. |
+| Volume fields | `u`, `v`, `p`, `nu_t` on a 256 × 128 grid, `x ∈ [-2.16, 4.23]`, `y ∈ [-1.65, 1.65]`, row-major `(ny, nx)`. |
+| Units | `Cp = p / (0.5·U∞²)` (already divided by dynamic pressure). Values from the binary basis are in normalised space; multiply by the standard deviation and add the mean from `field_basis.json` to get physical units. |
+| Max-thickness position | A discrete quantity: only 5 distinct values exist in the dataset, and the five-digit family uses 3 of them. Never differentiate or continuously perturb it. |
+
+### Hosting requirements
+
+| Requirement | Why |
+|---|---|
+| Serve `.wasm` as `application/wasm` | ONNX Runtime Web does not fall back to `ArrayBuffer` loading and fails silently otherwise. `serve.py` pins the MIME type; Python's `http.server` below 3.9 and many minimal servers get it wrong. GitHub Pages is correct out of the box. |
+| No `Cross-Origin-Opener-Policy` / `Cross-Origin-Embedder-Policy` needed | The models run with `ort.env.wasm.numThreads = 1`, so no `SharedArrayBuffer`. This is what makes plain static hosting sufficient (GitHub Pages cannot send custom headers). A multi-threaded build would require COOP/COEP and therefore a different host. |
+| Relative base path | Vite is configured with `base: './'`; assets resolve relative to the document, so the site runs unchanged at `https://<user>.github.io/<repo>/`. |
+| Hash routing | Pages are selected by `#hash`; no 404 rewrite rules or SPA fallback are required. |
+| Browser support | WebAssembly SIMD: Chrome 91+, Edge 91+, Firefox 89+, Safari 16.4+. |
+
+### Optional LLM endpoint
+
+The inverse-design page can call an OpenAI-compatible chat endpoint. It is strictly optional — with no configuration the page runs a local rule-based mode and the badge says so.
+
+| Field | Meaning |
+|---|---|
+| `endpoint` | Base URL of an OpenAI-compatible API; the page posts to `{endpoint}/chat/completions` |
+| `model` | Model name passed through to the provider |
+| `apiKey` | Bearer token |
+
+The key is held in **memory only** — never written to `localStorage`, `sessionStorage`, IndexedDB, cookies or a file; it disappears when the tab is closed or reloaded. No default key exists anywhere in the code or repository. The training and inverse-design pipelines never call an external endpoint.
+
+### Conformance checks
+
+Self-checks ship with the repository and pass/fail by fixed output strings, so they can gate a build:
+
+| Command | Pass criterion |
+|---|---|
+| `node source/scripts/check-geom.mjs` | `PASS all 12 items < 1e-9` — browser geometry vs the official generator, point by point |
+| `node source/scripts/check-proxies.mjs` | `PROXY_CHECK_OK` — lift integration, local Mach proxy, separation proxy |
+| `node source/scripts/check-vtp.mjs` | `VTP_CHECK_OK` — `.vtp` parsing vs the Python reference, to 5e-7 |
+| `python tools/verify_demo_assets.py` | 25-item asset audit: presence, byte sizes, array shapes, value ranges |
+| ONNX export check | `|ONNX − PyTorch| ≤ 1e-4 + 1e-3·|PyTorch|` element-wise, at least 8 samples covering both families |
+
+---
+
+## Quick start
+
+### Try it
+
+Open <https://ygrf0816.github.io/airfrans-MOR-demo/> in desktop Chrome or Edge. Nothing to install.
+
+### Run locally
+
+Do **not** open `site/index.html` by double-clicking: the `file://` protocol blocks the model and data fetches and the page stays blank. Use the bundled server:
+
+```bash
+python serve.py            # http://127.0.0.1:8080
+python serve.py 9000       # custom port
+```
+
+`serve.py` only pins the MIME types that matter (`.wasm`, `.onnx`, `.bin`); it needs nothing beyond the standard library.
+
+### Rebuild the site
+
+```bash
 cd source
 npm ci
-npm run build
+npm run build        # output in source/dist; copy over site/ and keep site/data/
 ```
 
-构建产物输出到 `source/dist/`，把它复制到 `site/` 即可替换（`site/data/` 保持不变）。
+### Regenerate assets
 
-`tools/` 下的脚本用于从上游数据重新生成资产，需要 GPU 与完整数据集。
-训练与搜索的完整脚本在 [`code/`](code/README.md)，复现前先把脚本里的工作站路径
-（`/home/user/airfrans` 等）改成自己的：
+Asset export needs the upstream dataset and a GPU; the training and search code is in [`code/`](code/README.md). Paths inside those scripts were written for the author's workstation and must be adjusted first.
 
-```
-python tools/make_geom_fixture.py      # 几何核对基准
-python tools/make_proxy_fixture.py     # 代理量核对基准
-python tools/make_web_data.py          # 汇总成网页资产
-python tools/make_explain_data.py      # 可解释性分析页的数据
-python tools/verify_demo_assets.py     # 一致性核对
-```
+---
 
-## 前端一致性自检
+## Repository layout
 
-`source/scripts/` 下有检查脚本，判据是「跑出固定字符串才算通过」：
-
-| 脚本 | 判据 |
+| Path | Content |
 |---|---|
-| `check-geom.mjs` | `PASS all 12 items < 1e-9`，浏览器端几何实现与官方生成器逐点比对 |
-| `check-proxies.mjs` | `PROXY_CHECK_OK`，升力积分、局部马赫代理与分离代理 |
-| `check-vtp.mjs` | `VTP_CHECK_OK`，浏览器端 `.vtp` 解析与 Python 参考实现比对到 5e-7 |
-| `check-naca.mjs` | 翼型几何与官方实现逐点一致 |
+| `code/` | Core code: surrogate training, inverse design, explainability, reduction (see [`code/README.md`](code/README.md)) |
+| `source/` | Frontend source (Vite + React 19 + TypeScript) |
+| `site/` | Built static site and exported assets — this is what gets deployed |
+| `tools/` | Asset export, verification and packaging scripts |
+| `docs/` | Plan, data contract, UI design, development log, upstream-code reuse list |
+| `serve.py` | Local static server with correct MIME types |
+| `LICENSE` / `DATA_LICENSE.md` | MIT for code, ODbL for the derived assets |
 
-## 实现要点
+Not included: the 14.3 GB upstream dataset, training checkpoints (`.pth`), and the reports/paper of the submission package.
 
-- **单线程 WASM。** `source/src/lib/models.ts` 里写死 `ort.env.wasm.numThreads = 1`。
-  多线程后端要 `SharedArrayBuffer`，那要求服务器发 `Cross-Origin-Opener-Policy` 与
-  `Cross-Origin-Embedder-Policy` 响应头，而 GitHub Pages 不允许自定义响应头。
-- **不依赖站点根路径。** 构建时 `base: './'`，所有资产用相对路径取，
-  因此放在 `https://<user>.github.io/<repo>/` 这样的子路径下能直接跑。
-- **哈希路由。** 页面切换走 `#hash`，静态托管不需要任何 404 重写规则。
-- **缺数据不崩。** 任何资产取不到就退回内置解析近似，并在页面上标出当前是示例数据。
-- **体积。** 整站约 58 MB，其中 27 MB 是 ONNX Runtime 的 wasm；
-  数据按页面按需拉取，不会一次性下载全部资产。
+---
 
-## 许可与引用
+## License and citation
 
-- **代码**（`code/`、`source/`、`tools/`、`serve.py`）：MIT，见 [`LICENSE`](LICENSE)。
-  其中几何生成、数据加载与力系数口径三处参照或直接使用了官方 AirfRANS 的实现，
-  逐条清单见 [`docs/06_airfrans_reuse.md`](docs/06_airfrans_reuse.md)。
-- **数据与模型资产**（`site/data/`）：AirfRANS 数据集的衍生作品，沿用上游
-  ODbL v1.0，署名与再分发要求见 [`DATA_LICENSE.md`](DATA_LICENSE.md)。
-- 本仓库仅用于竞赛演示与技术交流。
+- **Code** (`code/`, `source/`, `tools/`, `serve.py`): MIT — see [`LICENSE`](LICENSE). Geometry generation, data loading and force-coefficient conventions reference or reuse the official AirfRANS implementation; the itemised list is in [`docs/06_airfrans_reuse.md`](docs/06_airfrans_reuse.md).
+- **Data and model assets** (`site/data/`): derivative of the AirfRANS dataset, distributed under the upstream ODbL v1.0 — see [`DATA_LICENSE.md`](DATA_LICENSE.md).
 
-使用本项目或数据集，请引用官方论文：
+If you use this project or the dataset, please cite:
 
 ```bibtex
 @inproceedings{bonnet2022airfrans,
