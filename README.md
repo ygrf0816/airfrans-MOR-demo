@@ -91,27 +91,25 @@ The video is the submission material for this entry: it walks the problem, the t
 
 The system has an offline half that produces assets and an online half that consumes them. They meet at a single contract: the files in `site/data/`.
 
-```
-                 OFFLINE (GPU workstation)                        ONLINE (visitor's browser)
- ┌──────────────────────────────────────────────┐   ┌───────────────────────────────────────────┐
- │ AirfRANS raw solutions   1000 × ~180k nodes  │   │  static site (GitHub Pages)               │
- │            │                                 │   │    ├─ HTML / JS / CSS  (Vite build)       │
- │            ▼                                 │   │    ├─ ONNX Runtime Web  (WASM, 1 thread)  │
- │  wall Cp (256-pt closed loop)                │   │    └─ data assets  ◄──────────────────┐    │
- │  volume fields on 256×128 grid               │   │            │                         │    │
- │            │                                 │   │            ▼                         │    │
- │            ▼                                 │   │  z-score inputs (stats from basis)   │    │
- │  POD basis  (Cp: 5 modes, fields: 3–8)       │   │            │                         │    │
- │            │                                 │   │            ▼                         │    │
- │            ▼                                 │   │  ONNX: 133 → 8 / 133 → 128           │    │
- │  MLP 133 → 8 / 128    ~0.3 M params          │   │            │                         │    │
- │            │                                 │   │            ▼                         │    │
- │            ▼                                 │   │  POD coords → physics                │    │
- │  train · evaluate · export ONNX              │   │            │                         │    │
- │            │                                 │   │            ▼                         │    │
- │            ▼                                 │   │  ECharts curves · canvas field maps   │    │
- │  asset export  ──────────────────────────────┼───┼─► site/data/  (ONNX, .bin, .json)     │    │
- └──────────────────────────────────────────────┘   └───────────────────────────────────────────┘
+```mermaid
+flowchart LR
+  subgraph OFF["Offline · GPU workstation"]
+    A["AirfRANS raw<br/>1000 × ~180k nodes"] --> B["Wall Cp<br/>256-pt closed loop"]
+    A --> C["Volume fields<br/>256 × 128 grid"]
+    B --> D["POD basis<br/>Cp: 5 modes"]
+    C --> E["POD basis<br/>fields: 3–8 modes"]
+    D --> F["MLP 133 → 8"]
+    E --> G["MLP 133 → 128"]
+    F --> H["ONNX export<br/>+ asset packing"]
+    G --> H
+  end
+  subgraph ON["Online · visitor browser"]
+    I["Static site<br/>HTML / JS / CSS"] --> J["ONNX Runtime Web<br/>WASM · 1 thread"]
+    K["data assets<br/>ONNX · .bin · .json"] --> J
+    J --> L["POD coords → physics"]
+    L --> M["ECharts curves<br/>canvas field maps"]
+  end
+  H --> K
 ```
 
 ### Data pipeline
